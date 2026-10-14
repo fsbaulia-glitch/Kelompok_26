@@ -6,13 +6,13 @@
   <title>Daftar Akun Baru - TaskMate</title>
   <style>
     :root {
-      --bg-page: #f8fafc;
+      --bg-page: #f4f6fa;
       --card-bg: #ffffff;
       --primary-dark: #0f172a;
       --primary: #4f46e5;
       --text-main: #1e293b;
       --text-muted: #64748b;
-      --border-color: #e2e8f0;
+      --border-color: #cbd5e1;
       --success-green: #10b981;
     }
 
@@ -29,87 +29,51 @@
       min-height: 100vh;
       display: flex;
       flex-direction: column;
-      justify-content: space-between;
-      padding: 24px 32px;
-    }
-
-    /* Header Nav */
-    header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      width: 100%;
-    }
-
-    .brand-logo {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      text-decoration: none;
-    }
-
-    .brand-logo img {
-      width: 28px;
-      height: 28px;
-    }
-
-    .brand-logo span {
-      font-size: 16px;
-      font-weight: 700;
-      color: var(--primary-dark);
-    }
-
-    .top-login-link {
-      font-size: 13px;
-      color: var(--text-muted);
-    }
-
-    .top-login-link a {
-      color: var(--primary);
-      text-decoration: none;
-      font-weight: 600;
-    }
-
-    .top-login-link a:hover {
-      text-decoration: underline;
-    }
-
-    /* Main Card Layout */
-    main {
-      display: flex;
-      flex-direction: column;
       align-items: center;
       justify-content: center;
-      flex: 1;
-      padding: 20px 0;
+      padding: 32px 16px;
     }
 
+    /* Card Container */
     .register-card {
       background: var(--card-bg);
-      border: 1px solid var(--border-color);
-      border-radius: 20px;
-      padding: 40px;
+      border-radius: 24px;
+      padding: 48px 40px;
       width: 100%;
-      max-width: 460px;
-      box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05), 0 8px 10px -6px rgba(0, 0, 0, 0.05);
+      max-width: 520px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.04);
+      margin-bottom: 24px;
     }
 
+    /* Header Logo & Title inside Card */
     .card-header {
       text-align: center;
-      margin-bottom: 28px;
+      margin-bottom: 32px;
     }
 
-    .card-header img {
-      width: 36px;
-      height: 36px;
-      margin-bottom: 12px;
+    .brand-inline {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 16px;
     }
 
-    .card-header h2 {
-      font-size: 22px;
+    .brand-inline img {
+      width: 32px;
+      height: 32px;
+    }
+
+    .brand-inline span {
+      font-size: 18px;
       font-weight: 700;
       color: var(--primary-dark);
-      margin-bottom: 6px;
+    }
+
+    .card-header h1 {
+      font-size: 24px;
+      font-weight: 700;
+      color: var(--primary-dark);
+      margin-bottom: 8px;
     }
 
     .card-header p {
@@ -119,7 +83,7 @@
 
     /* Form Styles */
     .form-group {
-      margin-bottom: 18px;
+      margin-bottom: 20px;
     }
 
     .form-group label {
@@ -129,7 +93,7 @@
       color: var(--text-muted);
       text-transform: uppercase;
       letter-spacing: 0.5px;
-      margin-bottom: 6px;
+      margin-bottom: 8px;
     }
 
     .input-wrapper {
@@ -140,10 +104,10 @@
 
     .input-wrapper input {
       width: 100%;
-      padding: 10px 14px 10px 38px;
+      padding: 12px 16px 12px 42px;
       border: 1px solid var(--border-color);
-      border-radius: 8px;
-      font-size: 13px;
+      border-radius: 12px;
+      font-size: 14px;
       color: var(--text-main);
       background-color: #ffffff;
       outline: none;
@@ -157,32 +121,41 @@
 
     .input-icon {
       position: absolute;
-      left: 12px;
-      font-size: 14px;
+      left: 14px;
+      font-size: 16px;
       color: var(--text-muted);
     }
 
     .password-toggle {
       position: absolute;
-      right: 12px;
+      right: 14px;
       background: none;
       border: none;
       cursor: pointer;
-      font-size: 14px;
+      font-size: 16px;
       color: var(--text-muted);
+    }
+
+    .password-header-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 8px;
+    }
+
+    .password-header-row label {
+      margin-bottom: 0;
     }
 
     .password-hint {
-      display: flex;
-      justify-content: space-between;
       font-size: 11px;
       color: var(--text-muted);
-      margin-top: 4px;
     }
 
+    /* Strength Bars */
     .strength-bars {
       display: flex;
-      gap: 4px;
+      gap: 6px;
       margin-top: 8px;
       align-items: center;
     }
@@ -198,15 +171,18 @@
     .terms-group {
       display: flex;
       align-items: flex-start;
-      gap: 8px;
-      margin: 20px 0;
+      gap: 10px;
+      margin: 24px 0;
       font-size: 12px;
       color: var(--text-muted);
     }
 
     .terms-group input[type="checkbox"] {
-      margin-top: 2px;
-      accent-color: var(--primary);
+      width: 16px;
+      height: 16px;
+      margin-top: 1px;
+      accent-color: var(--success-green);
+      cursor: pointer;
     }
 
     .terms-group a {
@@ -224,8 +200,8 @@
       background-color: var(--primary-dark);
       color: #ffffff;
       border: none;
-      border-radius: 8px;
-      padding: 11px;
+      border-radius: 12px;
+      padding: 14px;
       font-size: 14px;
       font-weight: 600;
       cursor: pointer;
@@ -241,7 +217,7 @@
       display: flex;
       align-items: center;
       text-align: center;
-      margin: 20px 0;
+      margin: 24px 0;
       color: var(--text-muted);
       font-size: 11px;
       text-transform: uppercase;
@@ -255,7 +231,7 @@
     }
 
     .divider span {
-      padding: 0 10px;
+      padding: 0 12px;
     }
 
     /* Google Button */
@@ -264,8 +240,8 @@
       background-color: #ffffff;
       color: var(--text-main);
       border: 1px solid var(--border-color);
-      border-radius: 8px;
-      padding: 10px;
+      border-radius: 12px;
+      padding: 12px;
       font-size: 13px;
       font-weight: 500;
       cursor: pointer;
@@ -280,11 +256,12 @@
       background-color: #f8fafc;
     }
 
+    /* Footer Text in Card */
     .card-footer-text {
       text-align: center;
-      font-size: 12px;
+      font-size: 13px;
       color: var(--text-muted);
-      margin-top: 20px;
+      margin-top: 24px;
     }
 
     .card-footer-text a {
@@ -297,108 +274,100 @@
       text-decoration: underline;
     }
 
+    /* Page Footer Copyright */
     footer {
       text-align: center;
       font-size: 11px;
       color: var(--text-muted);
-      width: 100%;
     }
   </style>
 </head>
 <body>
 
-  <!-- HEADER -->
-  <header>
-    <a href="./index.html" class="brand-logo">
-      <img src="./assets/image/logo-taskmate.svg" alt="Logo TaskMate">
-      <span>TaskMate</span>
-    </a>
-    <div class="top-login-link">
-      Sudah memiliki akun? <a href="./login.html">Masuk</a>
-    </div>
-  </header>
-
   <!-- KARTU UTAMA -->
-  <main>
-    <div class="register-card">
-      
-      <div class="card-header">
+  <div class="register-card">
+    
+    <div class="card-header">
+      <div class="brand-inline">
         <img src="./assets/image/logo-taskmate.svg" alt="Logo TaskMate">
-        <h2>Buat Akun Baru</h2>
-        <p>Mulai kelola tugas Anda dengan lebih mudah</p>
+        <span>TaskMate</span>
       </div>
-
-      <form action="./dashboard.html" method="post">
-        
-        <!-- Nama Lengkap -->
-        <div class="form-group">
-          <label for="reg-nama">Nama Lengkap</label>
-          <div class="input-wrapper">
-            <span class="input-icon">👤</span>
-            <input type="text" id="reg-nama" name="nama_lengkap" placeholder="Sarah Putri Maharani" required>
-          </div>
-        </div>
-
-        <!-- Email -->
-        <div class="form-group">
-          <label for="reg-email">Email</label>
-          <div class="input-wrapper">
-            <span class="input-icon">✉️</span>
-            <input type="email" id="reg-email" name="email" placeholder="sarah12345@email.com" required>
-          </div>
-        </div>
-
-        <!-- Password -->
-        <div class="form-group">
-          <label for="reg-password">Kata Sandi</label>
-          <div class="input-wrapper">
-            <span class="input-icon">🔒</span>
-            <input type="password" id="reg-password" name="password" placeholder="Buat kata sandi yang aman" required>
-            <button type="button" class="password-toggle">👁️</button>
-          </div>
-          <div class="password-hint">
-            <span></span>
-            <span>Min. 8 karakter</span>
-          </div>
-          <div class="strength-bars">
-            <div class="strength-bar"></div>
-            <div class="strength-bar"></div>
-            <div class="strength-bar"></div>
-            <div class="strength-bar"></div>
-            <span style="font-size: 11px; color: var(--success-green); font-weight: 600; margin-left: 6px;">Kuat</span>
-          </div>
-        </div>
-
-        <!-- Syarat Ketentuan -->
-        <div class="terms-group">
-          <input type="checkbox" id="terms" required checked>
-          <label for="terms" style="text-transform: none; font-size: 12px; font-weight: normal; color: var(--text-muted); display: inline;">
-            Saya menyetujui <a href="#">Syarat & Ketentuan</a> serta <a href="#">Kebijakan Privasi</a> TaskMate.
-          </label>
-        </div>
-
-        <button type="submit" class="btn-submit">Daftar</button>
-
-      </form>
-
-      <div class="divider">
-        <span>Atau daftar dengan</span>
-      </div>
-
-      <button type="button" class="btn-google">
-        <svg width="16" height="16" viewBox="0 0 24 24"><path fill="#4285F4" d="M23.745 12.27c0-.7-.06-1.4-.19-2.07H12v4.51h6.6c-.29 1.52-1.14 2.82-2.4 3.68v3.05h3.88c2.27-2.09 3.66-5.17 3.66-9.17z"/><path fill="#34A853" d="M12 24c3.24 0 5.95-1.08 7.93-2.91l-3.88-3.05c-1.08.72-2.45 1.16-4.05 1.16-3.13 0-5.78-2.11-6.73-4.96H1.19v3.15C3.18 21.32 7.23 24 12 24z"/><path fill="#FBBC05" d="M5.27 14.24c-.25-.72-.38-1.49-.38-2.24s.13-1.52.38-2.24V6.6H1.19C.43 8.13 0 9.87 0 12s.43 3.87 1.19 5.4l4.08-3.16z"/><path fill="#EA4335" d="M12 4.75c1.77 0 3.35.61 4.6 1.8l3.42-3.42C17.95 1.19 15.24 0 12 0 7.23 0 3.18 2.68 1.19 6.6l4.08 3.15c.95-2.85 3.6-4.96 6.73-4.96z"/></svg>
-        Daftar dengan Google
-      </button>
-
-      <div class="card-footer-text">
-        Sudah punya akun? <a href="./login.html">Login</a>
-      </div>
-
+      <h1>Buat Akun Baru</h1>
+      <p>Mulai kelola tugas Anda dengan lebih mudah</p>
     </div>
-  </main>
 
+    <form action="./dashboard.html" method="post">
+      
+      <!-- Nama Lengkap -->
+      <div class="form-group">
+        <label for="reg-nama">Nama Lengkap</label>
+        <div class="input-wrapper">
+          <span class="input-icon">👤</span>
+          <input type="text" id="reg-nama" name="nama_lengkap" placeholder="Sarah Putri Maharani" required>
+        </div>
+      </div>
+
+      <!-- Email -->
+      <div class="form-group">
+        <label for="reg-email">Email</label>
+        <div class="input-wrapper">
+          <span class="input-icon">✉️</span>
+          <input type="email" id="reg-email" name="email" placeholder="sarah12345@email.com" required>
+        </div>
+      </div>
+
+      <!-- Password -->
+      <div class="form-group">
+        <div class="password-header-row">
+          <label for="reg-password">Kata Sandi</label>
+          <span class="password-hint">Min. 8 karakter</span>
+        </div>
+        <div class="input-wrapper">
+          <span class="input-icon">🔒</span>
+          <input type="password" id="reg-password" name="password" placeholder="Buat kata sandi yang aman" required>
+          <button type="button" class="password-toggle">👁️</button>
+        </div>
+        <div class="strength-bars">
+          <div class="strength-bar"></div>
+          <div class="strength-bar"></div>
+          <div class="strength-bar"></div>
+          <div class="strength-bar"></div>
+          <span style="font-size: 11px; color: var(--success-green); font-weight: 600; margin-left: 8px;">Kuat</span>
+        </div>
+      </div>
+
+      <!-- Syarat & Ketentuan -->
+      <div class="terms-group">
+        <input type="checkbox" id="terms" required checked>
+        <label for="terms" style="text-transform: none; font-size: 12px; font-weight: normal; color: var(--text-muted); display: inline; cursor: pointer;">
+          Saya menyetujui <a href="#">Syarat & Ketentuan</a> serta <a href="#">Kebijakan Privasi</a> TaskMate.
+        </label>
+      </div>
+
+      <!-- Tombol Daftar -->
+      <button type="submit" class="btn-submit">Daftar</button>
+
+    </form>
+
+    <div class="divider">
+      <span>Atau daftar dengan</span>
+    </div>
+
+    <!-- Tombol Google -->
+    <button type="button" class="btn-google">
+      <svg width="16" height="16" viewBox="0 0 24 24"><path fill="#4285F4" d="M23.745 12.27c0-.7-.06-1.4-.19-2.07H12v4.51h6.6c-.29 1.52-1.14 2.82-2.4 3.68v3.05h3.88c2.27-2.09 3.66-5.17 3.66-9.17z"/><path fill="#34A853" d="M12 24c3.24 0 5.95-1.08 7.93-2.91l-3.88-3.05c-1.08.72-2.45 1.16-4.05 1.16-3.13 0-5.78-2.11-6.73-4.96H1.19v3.15C3.18 21.32 7.23 24 12 24z"/><path fill="#FBBC05" d="M5.27 14.24c-.25-.72-.38-1.49-.38-2.24s.13-1.52.38-2.24V6.6H1.19C.43 8.13 0 9.87 0 12s.43 3.87 1.19 5.4l4.08-3.16z"/><path fill="#EA4335" d="M12 4.75c1.77 0 3.35.61 4.6 1.8l3.42-3.42C17.95 1.19 15.24 0 12 0 7.23 0 3.18 2.68 1.19 6.6l4.08 3.15c.95-2.85 3.6-4.96 6.73-4.96z"/></svg>
+      Daftar dengan Google
+    </button>
+
+    <div class="card-footer-text">
+      Sudah punya akun? <a href="./login.html">Login</a>
+    </div>
+
+  </div>
+
+  <!-- FOOTER COPYRIGHT -->
   <footer>
-    <p>&copy; 2026 TaskMate Inc. Seluruh hak cipta dilindungi.</p>
+    <p>&copy; 2025 TaskMate Inc. Seluruh hak cipta dilindungi.</p>
   </footer>
 
 </body>
