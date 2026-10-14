@@ -4,90 +4,642 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Rekap Tugas - TaskMate</title>
+  <style>
+    :root {
+      --bg-main: #f8fafc;
+      --bg-sidebar: #ffffff;
+      --primary: #4f46e5;
+      --primary-light: #eef2ff;
+      --text-main: #0f172a;
+      --text-muted: #64748b;
+      --border-color: #e2e8f0;
+      --card-bg: #ffffff;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    }
+
+    body {
+      background-color: var(--bg-main);
+      color: var(--text-main);
+      display: flex;
+      min-height: 100vh;
+    }
+
+    /* Sidebar Styling */
+    aside {
+      width: 260px;
+      background-color: var(--bg-sidebar);
+      border-right: 1px solid var(--border-color);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 24px 16px;
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 100vh;
+      z-index: 10;
+    }
+
+    .logo-area {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 0 12px 20px 12px;
+      border-bottom: 1px solid var(--border-color);
+      margin-bottom: 20px;
+    }
+
+    .logo-area img {
+      width: 28px;
+      height: 28px;
+    }
+
+    .logo-text h2 {
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--text-main);
+    }
+
+    .logo-text p {
+      font-size: 11px;
+      color: var(--text-muted);
+    }
+
+    aside nav ul {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    aside nav ul li a {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 10px 12px;
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 500;
+      border-radius: 8px;
+      transition: all 0.2s ease;
+    }
+
+    aside nav ul li a:hover,
+    aside nav ul li.active a {
+      background-color: var(--primary-light);
+      color: var(--primary);
+    }
+
+    aside nav ul li.active a {
+      font-weight: 600;
+    }
+
+    .sidebar-bottom {
+      border-top: 1px solid var(--border-color);
+      padding-top: 16px;
+    }
+
+    .sidebar-bottom a {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 10px 12px;
+      color: #ef4444;
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 500;
+      border-radius: 8px;
+    }
+
+    .sidebar-bottom a:hover {
+      background-color: #fee2e2;
+    }
+
+    /* Main Content */
+    main {
+      margin-left: 260px;
+      flex: 1;
+      padding: 32px;
+      width: calc(100% - 260px);
+    }
+
+    /* Top Navigation Bar */
+    .top-nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 28px;
+      padding-bottom: 16px;
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    .search-bar {
+      position: relative;
+      width: 400px;
+    }
+
+    .search-bar input {
+      width: 100%;
+      padding: 10px 16px 10px 40px;
+      border: 1px solid var(--border-color);
+      border-radius: 99px;
+      font-size: 13px;
+      background-color: #f8fafc;
+      outline: none;
+    }
+
+    .user-profile-nav {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .icon-btn {
+      background: #ffffff;
+      border: 1px solid var(--border-color);
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      position: relative;
+    }
+
+    .icon-btn::after {
+      content: '';
+      position: absolute;
+      top: 8px;
+      right: 9px;
+      width: 7px;
+      height: 7px;
+      background-color: #ef4444;
+      border-radius: 50%;
+    }
+
+    .profile-pill {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      background: #ffffff;
+      border: 1px solid var(--border-color);
+      padding: 4px 12px 4px 4px;
+      border-radius: 99px;
+      text-decoration: none;
+      color: inherit;
+    }
+
+    .profile-pill img {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      object-fit: cover;
+    }
+
+    .profile-info-nav h4 {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--text-main);
+    }
+
+    .profile-info-nav p {
+      font-size: 11px;
+      color: var(--text-muted);
+    }
+
+    /* Page Header */
+    .page-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 24px;
+    }
+
+    .page-header h1 {
+      font-size: 22px;
+      font-weight: 700;
+      color: var(--text-main);
+      margin-bottom: 4px;
+    }
+
+    .page-header p {
+      font-size: 13px;
+      color: var(--text-muted);
+    }
+
+    .header-actions {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      background: #f1f5f9;
+      padding: 4px;
+      border-radius: 10px;
+    }
+
+    .header-actions a {
+      text-decoration: none;
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--text-muted);
+      padding: 6px 14px;
+      border-radius: 8px;
+    }
+
+    .header-actions a.active {
+      background: #ffffff;
+      color: var(--text-main);
+      font-weight: 600;
+      box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+    }
+
+    .btn-download {
+      background: #ffffff;
+      border: 1px solid var(--border-color);
+      padding: 8px 14px;
+      border-radius: 8px;
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--text-main);
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      margin-left: 8px;
+      text-decoration: none;
+    }
+
+    /* Chart Card Section */
+    .chart-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      padding: 24px;
+      margin-bottom: 32px;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.02);
+    }
+
+    .chart-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 24px;
+    }
+
+    .chart-title-group .sub-title {
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 4px;
+    }
+
+    .chart-title-group h2 {
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--text-main);
+    }
+
+    .chart-legend {
+      display: flex;
+      gap: 16px;
+      font-size: 12px;
+      color: var(--text-muted);
+      align-items: center;
+    }
+
+    .legend-item {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .legend-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #94a3b8;
+    }
+
+    .legend-dot.dark {
+      background: #1e293b;
+    }
+
+    /* Mockup Bar Chart Container */
+    .chart-container {
+      display: flex;
+      justify-content: space-around;
+      align-items: flex-end;
+      height: 200px;
+      border-bottom: 1px solid var(--border-color);
+      padding-bottom: 8px;
+      position: relative;
+    }
+
+    .chart-bar-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+      width: 40px;
+    }
+
+    .bar {
+      width: 28px;
+      background: #94a3b8;
+      border-radius: 4px 4px 0 0;
+      transition: height 0.3s;
+    }
+
+    .bar.highlight {
+      background: #1e293b;
+      position: relative;
+    }
+
+    .bar-tooltip {
+      position: absolute;
+      top: -28px;
+      background: #1e293b;
+      color: #fff;
+      font-size: 10px;
+      padding: 2px 6px;
+      border-radius: 4px;
+      font-weight: 600;
+      white-space: nowrap;
+    }
+
+    .bar-label {
+      font-size: 12px;
+      color: var(--text-muted);
+      font-weight: 500;
+      margin-top: 8px;
+    }
+
+    /* Summary Status Grid */
+    .status-section-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 16px;
+    }
+
+    .status-section-header h2 {
+      font-size: 16px;
+      font-weight: 700;
+    }
+
+    .status-section-header span {
+      font-size: 12px;
+      color: var(--text-muted);
+    }
+
+    .status-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 20px;
+    }
+
+    .status-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      padding: 20px;
+      position: relative;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.02);
+    }
+
+    .status-card .card-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 12px;
+    }
+
+    .status-card .label {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--text-muted);
+    }
+
+    .status-card .icon-box {
+      width: 28px;
+      height: 28px;
+      border-radius: 6px;
+      background: #f1f5f9;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 12px;
+    }
+
+    .status-card .value {
+      font-size: 24px;
+      font-weight: 700;
+      color: var(--text-main);
+      margin-bottom: 16px;
+    }
+
+    .status-card .card-footer {
+      font-size: 11px;
+      color: var(--text-muted);
+      border-top: 1px solid #f1f5f9;
+      padding-top: 10px;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .status-card .card-footer.green {
+      color: #10b981;
+      font-weight: 500;
+    }
+
+    .status-card .card-footer.red {
+      color: #ef4444;
+      font-weight: 500;
+    }
+  </style>
 </head>
 <body>
 
-  <header>
-    <a href="./index.html">
-      <img src="./assets/image/logo-taskmate.svg" alt="Logo TaskMate">
-    </a>
-    <a href="./profil.html">
-      <img src="./assets/image/avatar-user.svg" alt="Foto Profil User">
-      <span>User</span>
-    </a>
-  </header>
-
+  <!-- SIDEBAR -->
   <aside>
-    <nav>
-      <ul>
-        <li><a href="./dashboard.html">Dashboard</a></li>
-        <li><a href="./tugas.html">Tugas</a></li>
-        <li><a href="./rekap.html">Rekap</a></li>
-        <li><a href="./profil.html">Profil</a></li>
-        <li><a href="./notifikasi.html">Notifikasi</a></li>
-        <li><a href="./setting.html">Pengaturan</a></li>
-        <li><a href="./login.html">Keluar</a></li>
-      </ul>
-    </nav>
-  </aside>
-
-  <main>
-    <section>
-      <h1>Rekap Tugas</h1>
-      <p>Ringkasan performa dan grafik penyelesaian tugas akademik Anda.</p>
-
+    <div class="sidebar-top">
+      <div class="logo-area">
+        <img src="./assets/image/logo-taskmate.svg" alt="Logo TaskMate">
+        <div class="logo-text">
+          <h2>TaskMate</h2>
+          <p>Workspace Akademik</p>
+        </div>
+      </div>
       <nav>
         <ul>
-          <li><a href="#mingguan">Mingguan</a></li>
-          <li><a href="#bulanan">Bulanan</a></li>
-          <li><a href="#semester">Semester</a></li>
+          <li><a href="./dashboard.html">Dashboard</a></li>
+          <li><a href="./tugas.html">Tugas</a></li>
+          <li class="active"><a href="./rekap.html">Rekap</a></li>
+          <li><a href="./profil.html">Profil</a></li>
+          <li><a href="./notifikasi.html">Notifikasi</a></li>
+          <li><a href="./setting.html">Pengaturan</a></li>
         </ul>
       </nav>
-    </section>
+    </div>
+    <div class="sidebar-bottom">
+      <a href="./login.html">Keluar</a>
+    </div>
+  </aside>
 
-    <section id="grafik">
-      <h2>Frekuensi Tugas Diselesaikan</h2>
-      <figure>
-        <img src="./assets/image/chart-rekap.svg" alt="Grafik Batang Statistik Frekuensi Tugas Diselesaikan">
-        <figcaption>Grafik aktivitas penyelesaian tugas harian.</figcaption>
-      </figure>
-    </section>
+  <!-- KONTEN UTAMA -->
+  <main>
+    <!-- NAVIGASI ATAS -->
+    <div class="top-nav">
+      <div class="search-bar">
+        <input type="text" placeholder="Cari tugas, modul, atau tag...">
+      </div>
+      <div class="user-profile-nav">
+        <div class="icon-btn" title="Notifikasi"></div>
+        <a href="./profil.html" class="profile-pill">
+          <img src="./assets/image/avatar-user.svg" alt="User">
+          <div class="profile-info-nav">
+            <h4>User</h4>
+            <p>Mahasiswa</p>
+          </div>
+        </a>
+      </div>
+    </div>
 
-    <section id="ringkasan-status">
-      <h2>Ringkasan Status</h2>
-      <table>
-        <caption>Statistik Ringkasan Pengerjaan Tugas</caption>
-        <thead>
-          <tr>
-            <th scope="col">Status Tugas</th>
-            <th scope="col">Jumlah</th>
-            <th scope="col">Persentase</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <th scope="row">Total Tugas</th>
-            <td>20</td>
-            <td>100%</td>
-          </tr>
-          <tr>
-            <th scope="row">Selesai</th>
-            <td>12</td>
-            <td>60%</td>
-          </tr>
-          <tr>
-            <th scope="row">Sedang Dikerjakan</th>
-            <td>3</td>
-            <td>15%</td>
-          </tr>
-          <tr>
-            <th scope="row">Belum / Terlambat</th>
-            <td>5</td>
-            <td>25%</td>
-          </tr>
-        </tbody>
-      </table>
-    </section>
+    <!-- HEADER HALAMAN -->
+    <div class="page-header">
+      <div>
+        <h1>Rekap Tugas</h1>
+        <p>Analisis performa dan statistik penyelesaian tugas belajar Anda</p>
+      </div>
+      <div>
+        <div class="header-actions">
+          <a href="#" class="active">Mingguan</a>
+          <a href="#">Bulanan</a>
+          <a href="#">Tahunan</a>
+        </div>
+        <a href="#" class="btn-download">📥 Unduh</a>
+      </div>
+    </div>
+
+    <!-- KARTU GRAFIK AKTIVITAS -->
+    <div class="chart-card">
+      <div class="chart-header">
+        <div class="chart-title-group">
+          <div class="sub-title">Aktivitas Mingguan</div>
+          <h2>Frekuensi Tugas Diselesaikan</h2>
+        </div>
+        <div class="chart-legend">
+          <div class="legend-item"><span class="legend-dot"></span> Hari Reguler</div>
+          <div class="legend-item"><span class="legend-dot dark"></span> Puncak Aktivitas (Jum)</div>
+        </div>
+      </div>
+
+      <!-- Ilustrasi Grafik Batang -->
+      <div class="chart-container">
+        <div class="chart-bar-item">
+          <div class="bar" style="height: 35px;"></div>
+          <span class="bar-label">Sen</span>
+        </div>
+        <div class="chart-bar-item">
+          <div class="bar" style="height: 70px;"></div>
+          <span class="bar-label">Sel</span>
+        </div>
+        <div class="chart-bar-item">
+          <div class="bar" style="height: 70px;"></div>
+          <span class="bar-label">Rab</span>
+        </div>
+        <div class="chart-bar-item">
+          <div class="bar" style="height: 100px;"></div>
+          <span class="bar-label">Kam</span>
+        </div>
+        <div class="chart-bar-item">
+          <div class="bar" style="height: 70px;"></div>
+          <span class="bar-label">Kom</span>
+        </div>
+        <div class="chart-bar-item">
+          <div class="bar highlight" style="height: 160px;">
+            <div class="bar-tooltip">8 tugas</div>
+          </div>
+          <span class="bar-label" style="font-weight: 700; color: var(--text-main);">Jum</span>
+        </div>
+        <div class="chart-bar-item">
+          <div class="bar" style="height: 55px;"></div>
+          <span class="bar-label">Sab</span>
+        </div>
+        <div class="chart-bar-item">
+          <div class="bar" style="height: 90px;"></div>
+          <span class="bar-label">Min</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- RINGKASAN STATUS -->
+    <div class="status-section-header">
+      <h2>RINGKASAN STATUS</h2>
+      <span>Total akumulasi pekan ini</span>
+    </div>
+
+    <div class="status-grid">
+      <!-- Total Tugas -->
+      <div class="status-card">
+        <div class="card-top">
+          <span class="label">Total Tugas</span>
+          <div class="icon-box">📋</div>
+        </div>
+        <div class="value">20</div>
+        <div class="card-footer green">
+          <span>↗</span> +4 tugas <span>dari pekan lalu</span>
+        </div>
+      </div>
+
+      <!-- Selesai -->
+      <div class="status-card">
+        <div class="card-top">
+          <span class="label">Selesai</span>
+          <div class="icon-box" style="color: #10b981;">✓</div>
+        </div>
+        <div class="value" style="color: #10b981;">12</div>
+        <div class="card-footer" style="justify-content: space-between;">
+          <span>Tingkat Beres</span>
+          <strong style="color: #10b981;">60%</strong>
+        </div>
+      </div>
+
+      <!-- Terlambat -->
+      <div class="status-card">
+        <div class="card-top">
+          <span class="label">Terlambat</span>
+          <div class="icon-box" style="color: #ef4444;">⚠️</div>
+        </div>
+        <div class="value" style="color: #ef4444;">3</div>
+        <div class="card-footer red">
+          <span>●</span> Perlu evaluasi segera
+        </div>
+      </div>
+
+      <!-- Dalam Proses -->
+      <div class="status-card">
+        <div class="card-top">
+          <span class="label">Dalam Proses</span>
+          <div class="icon-box" style="color: #f59e0b;">⏳</div>
+        </div>
+        <div class="value" style="color: #f59e0b;">5</div>
+        <div class="card-footer" style="color: #d97706;">
+          <span>●</span> 2 mendekati tenggat
+        </div>
+      </div>
+    </div>
+
   </main>
 
 </body>
