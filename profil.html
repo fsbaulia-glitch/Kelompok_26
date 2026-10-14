@@ -32,7 +32,7 @@
       min-height: 100vh;
     }
 
-    /* Sidebar Styling */
+    /* Sidebar Styling (Fixed di Kiri) */
     aside {
       width: 260px;
       background-color: var(--bg-sidebar);
@@ -42,6 +42,8 @@
       justify-content: space-between;
       padding: 24px 16px;
       position: fixed;
+      top: 0;
+      left: 0;
       height: 100vh;
     }
 
@@ -112,12 +114,12 @@
       background-color: #fee2e2;
     }
 
-    /* Main Content Area */
+    /* Main Content Area (Wajib ada margin-left agar tidak tertutup sidebar) */
     main {
       margin-left: 260px;
       flex: 1;
       padding: 24px 32px;
-      max-width: calc(100vw - 260px);
+      width: calc(100% - 260px);
     }
 
     /* Top Navigation Bar */
@@ -513,4 +515,138 @@
       </nav>
     </div>
     <div class="sidebar-bottom">
-      <a href="./login.html">
+      <a href="./login.html">Keluar</a>
+    </div>
+  </aside>
+
+  <!-- KONTEN UTAMA -->
+  <main>
+    <!-- NAVIGASI ATAS -->
+    <div class="top-nav">
+      <div class="search-bar">
+        <input type="text" placeholder="Cari tugas...">
+      </div>
+      <div class="user-profile-nav">
+        <div class="icon-btn">🔔</div>
+        <div class="profile-pill">
+          <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=100" alt="User">
+          <div class="profile-info-nav">
+            <h4>User</h4>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- HEADER HALAMAN -->
+    <div class="page-header">
+      <div>
+        <h1>Profil</h1>
+        <p>Kelola informasi data akun dan profil akademik Anda</p>
+      </div>
+      <div>
+        <span class="badge-verified">● Akun Terverifikasi</span>
+      </div>
+    </div>
+
+    <!-- KARTU PROFIL UTAMA -->
+    <div class="profile-card">
+      <div class="profile-left">
+        <div class="avatar-wrapper">
+          <img src="./assets/image/avatar-user.svg" alt="Foto Profil">
+          <div class="avatar-badge-icon">📷</div>
+        </div>
+        <div class="profile-details">
+          <h2>Nama User <span class="tag-active">Mahasiswa Aktif</span></h2>
+          <p>user@email.com</p>
+          <p style="font-size: 12px; color: var(--text-muted);">Terdaftar sejak: September 2022</p>
+        </div>
+      </div>
+      <div>
+        <button class="btn-edit-profile">✏️ Ubah Profil</button>
+      </div>
+    </div>
+
+    <!-- KONTEN GRID BAWAH -->
+    <div class="content-grid">
+      
+      <!-- Kolom Kiri: Informasi Akun -->
+      <div class="info-box">
+        <div class="info-box-header">
+          <h3>Informasi Akun</h3>
+          <span>Data Akademik Terhubung</span>
+        </div>
+        <div class="info-list">
+          <div class="info-item">
+            <span class="info-label">Nama Lengkap</span>
+            <span class="info-value">Nama User</span>
+          </div>
+          <div class="info-item">
+            <span class="info-label">Email</span>
+            <span class="info-value">user@email.com <span class="badge-primer">Primer</span></span>
+          </div>
+          <div class="info-item">
+            <span class="info-label">NIM / ID</span>
+            <span class="info-value">12345678 📋</span>
+          </div>
+          <div class="info-item">
+            <span class="info-label">Program Studi</span>
+            <span class="info-value">Sistem Informasi</span>
+          </div>
+          <div class="info-item">
+            <span class="info-label">Fakultas</span>
+            <span class="info-value">Ilmu Komputer</span>
+          </div>
+          <div class="info-item">
+            <span class="info-label">Tahun Angkatan</span>
+            <span class="info-value">2022 (Semester 6)</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Kolom Kanan: Keamanan & Ringkasan Tugas -->
+      <div class="right-column">
+        
+        <!-- Keamanan Akun -->
+        <div class="security-box">
+          <h3>🔒 Keamanan Akun</h3>
+          <div class="security-item">
+            <div>
+              <strong>Kata Sandi</strong>
+              <div class="security-sub">Diubah 2 bulan lalu</div>
+            </div>
+            <a href="#" class="text-link">Ubah</a>
+          </div>
+          <div class="security-item">
+            <div>
+              <strong>Autentikasi 2 Langkah</strong>
+              <div class="security-sub">Proteksi login aktif</div>
+            </div>
+            <span class="badge-active-green">Aktif</span>
+          </div>
+        </div>
+
+        <!-- Ringkasan Tugas -->
+        <div class="task-summary-box">
+          <div class="task-summary-header">
+            <h3>Ringkasan Tugas</h3>
+            <span class="badge-semester">Semester Ini</span>
+          </div>
+          <div class="task-metrics">
+            <div class="metric-card">
+              <div class="label">Terselesaikan</div>
+              <div class="value">48 <span style="font-size: 11px; font-weight: normal; color: #94a3b8;">tugas</span></div>
+            </div>
+            <div class="metric-card">
+              <div class="label">Ketepatan</div>
+              <div class="value green">96.8%</div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </main>
+
+</body>
+</html>
