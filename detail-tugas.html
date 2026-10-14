@@ -1,61 +1,524 @@
+
 <!DOCTYPE html>
 <html lang="id">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Detail Tugas - TaskMate</title>
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      background: #f0f4f9;
+      color: #172033;
+      min-height: 100vh;
+      padding: 40px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .app {
+      width: 100%;
+      max-width: 1024px;
+      background: #ffffff;
+      border: 1px solid #dce5f0;
+      border-radius: 17px;
+      overflow: hidden;
+      box-shadow: 0 14px 25px rgba(20, 32, 50, 0.12);
+    }
+
+    /* Header */
+    .topbar {
+      min-height: 69px;
+      padding: 15px 32px;
+      display: flex;
+      align-items: center;
+      gap: 30px;
+      border-bottom: 1px solid #dce5f0;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 13px;
+      min-width: 205px;
+    }
+
+    .brand img {
+      width: 42px;
+      height: 36px;
+      object-fit: contain;
+    }
+
+    .brand strong {
+      font-size: 18px;
+    }
+
+    .search {
+      flex: 1;
+      max-width: 440px;
+      padding: 11px 13px;
+      display: flex;
+      gap: 10px;
+      align-items: center;
+      border: 1px solid #dce5f0;
+      background: #f8fafc;
+      border-radius: 9px;
+      color: #8da0bc;
+    }
+
+    .search input {
+      width: 100%;
+      border: none;
+      outline: none;
+      background: transparent;
+      font-size: 14px;
+    }
+
+    .user {
+      margin-left: auto;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      white-space: nowrap;
+      color: #455570;
+    }
+
+    .bell {
+      font-size: 20px;
+      padding-right: 18px;
+      border-right: 1px solid #e5eaf2;
+    }
+
+    .avatar {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 33px;
+      height: 33px;
+      background: #e3e9f2;
+      border-radius: 50%;
+      font-size: 17px;
+    }
+
+    /* Main */
+    main {
+      padding: 42px 40px 40px;
+    }
+
+    .back {
+      display: inline-block;
+      font-size: 20px;
+      font-weight: bold;
+      margin-bottom: 36px;
+    }
+
+    .back:hover {
+      color: #5145ff;
+    }
+
+    .detail-grid {
+      display: grid;
+      grid-template-columns: 40% 1fr;
+      gap: 32px;
+      align-items: start;
+    }
+
+    /* Preview */
+    .preview {
+      min-height: 375px;
+      border: 2px dashed #ccd9e9;
+      border-radius: 16px;
+      background: linear-gradient(145deg, #f1f5f9, #e8effb);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 25px;
+    }
+
+    .preview-icon {
+      width: 96px;
+      height: 96px;
+      border: 1px solid #e5ebf4;
+      border-radius: 17px;
+      background: #ffffff;
+      box-shadow: 0 3px 5px rgba(20, 32, 50, 0.1);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 42px;
+      color: #326bff;
+      margin-bottom: 18px;
+    }
+
+    .preview h2 {
+      font-size: 12px;
+      color: #687b98;
+      letter-spacing: 0.5px;
+      margin-bottom: 8px;
+    }
+
+    .preview p {
+      font-size: 12px;
+      color: #8da0bc;
+    }
+
+    /* Task information */
+    .task-heading {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      padding-bottom: 20px;
+      border-bottom: 1px solid #edf1f6;
+      margin-bottom: 20px;
+    }
+
+    .task-heading h1 {
+      font-size: 30px;
+      letter-spacing: -0.8px;
+    }
+
+    .status {
+      background: #fff4cf;
+      color: #a84b00;
+      border: 1px solid #ffe59a;
+      border-radius: 20px;
+      padding: 6px 13px;
+      font-size: 12px;
+      white-space: nowrap;
+    }
+
+    .info-list {
+      list-style: none;
+      display: grid;
+      gap: 15px;
+      padding-bottom: 20px;
+      border-bottom: 1px solid #edf1f6;
+    }
+
+    .info-list li {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      color: #455570;
+      font-size: 14px;
+    }
+
+    .info-icon {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 28px;
+      height: 28px;
+      flex-shrink: 0;
+      border-radius: 7px;
+      background: #f0f4f9;
+      color: #687b98;
+      font-size: 16px;
+    }
+
+    .description {
+      padding-top: 18px;
+    }
+
+    .description h2,
+    .subtasks h2 {
+      font-size: 14px;
+      margin-bottom: 9px;
+    }
+
+    .description p {
+      font-size: 14px;
+      color: #455570;
+      line-height: 1.65;
+    }
+
+    /* Subtasks */
+    .subtasks {
+      margin-top: 30px;
+      padding-top: 22px;
+      border-top: 1px solid #edf1f6;
+    }
+
+    .subtask-list {
+      list-style: none;
+      display: grid;
+      gap: 13px;
+    }
+
+    .subtask-list li {
+      display: flex;
+      align-items: center;
+      gap: 11px;
+      font-size: 14px;
+      color: #455570;
+    }
+
+    .subtask-list input {
+      width: 17px;
+      height: 17px;
+      accent-color: #5145ff;
+      cursor: pointer;
+    }
+
+    .subtask-list input:checked + label {
+      color: #8da0bc;
+      text-decoration: line-through;
+    }
+
+    /* Footer buttons */
+    .actions {
+      margin-top: 46px;
+      padding-top: 24px;
+      border-top: 1px solid #edf1f6;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 15px;
+    }
+
+    .btn {
+      padding: 12px 20px;
+      border: 1px solid #ccd9e9;
+      border-radius: 12px;
+      font-size: 14px;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      background: #ffffff;
+      color: #455570;
+    }
+
+    .btn:hover {
+      background: #f8fafc;
+    }
+
+    .btn-primary {
+      background: #111a2d;
+      border-color: #111a2d;
+      color: #ffffff;
+      box-shadow: 0 3px 5px rgba(20, 32, 50, 0.15);
+    }
+
+    .btn-primary:hover {
+      background: #26344c;
+      color: #ffffff;
+    }
+
+    .btn-primary.completed {
+      background: #008b67;
+      border-color: #008b67;
+    }
+
+    @media (max-width: 760px) {
+      body {
+        padding: 15px;
+        align-items: flex-start;
+      }
+
+      .topbar {
+        padding: 14px 18px;
+        gap: 12px;
+        flex-wrap: wrap;
+      }
+
+      .brand {
+        min-width: 0;
+      }
+
+      .brand strong {
+        font-size: 16px;
+      }
+
+      .search {
+        order: 3;
+        flex-basis: 100%;
+        max-width: none;
+      }
+
+      .user {
+        gap: 8px;
+      }
+
+      .bell {
+        padding-right: 10px;
+      }
+
+      main {
+        padding: 25px 20px;
+      }
+
+      .back {
+        margin-bottom: 25px;
+      }
+
+      .detail-grid {
+        grid-template-columns: 1fr;
+        gap: 25px;
+      }
+
+      .preview {
+        min-height: 250px;
+      }
+
+      .task-heading h1 {
+        font-size: 23px;
+      }
+
+      .actions {
+        margin-top: 30px;
+      }
+    }
+
+    @media (max-width: 400px) {
+      .task-heading h1 {
+        font-size: 20px;
+      }
+
+      .status {
+        font-size: 11px;
+        padding: 5px 8px;
+      }
+
+      .btn {
+        padding: 11px 12px;
+        font-size: 12px;
+      }
+    }
+  </style>
 </head>
+
 <body>
 
-  <header>
-    <a href="./index.html">
-      <img src="./assets/image/logo-taskmate.svg" alt="Logo TaskMate">
-    </a>
-  </header>
+  <div class="app">
 
-  <main>
-    <article>
-      <a href="./tugas.html">&larr; Kembali</a>
+    <header class="topbar">
+      <a href="./index.html" class="brand">
+        <img src="./assets/image/logo-taskmate.svg" alt="Logo TaskMate">
+        <strong>TaskMate</strong>
+      </a>
 
-      <header>
-        <h1>Tugas Desain UI</h1>
-        <p>Status: <strong>Sedang Dikerjakan</strong></p>
-      </header>
+      <form class="search" action="./tugas.html" method="get">
+        <span>⌕</span>
+        <input type="search" name="q" placeholder="Cari tugas..." aria-label="Cari tugas">
+      </form>
 
-      <figure>
-        <img src="./assets/image/hero-illustration.svg" alt="Pratinjau Aset Lampiran UI TaskMate">
-        <figcaption>Lampiran Pratinjau Desain Figma</figcaption>
-      </figure>
+      <div class="user">
+        <span class="bell">♧</span>
+        <span class="avatar">♟</span>
+        <span>User</span>
+        <span>⌄</span>
+      </div>
+    </header>
 
-      <section>
-        <h2>Informasi Tugas</h2>
-        <ul>
-          <li><strong>Deadline:</strong> 24 Mei 2026</li>
-          <li><strong>Mata Kuliah:</strong> Desain Web</li>
-          <li><strong>Waktu Pengerjaan:</strong> 08:00 - 17:00 WIB</li>
-          <li><strong>Prioritas:</strong> Tinggi</li>
-        </ul>
-      </section>
+    <main>
+      <a href="./tugas.html" class="back">← Detail Tugas</a>
 
-      <section>
-        <h2>Deskripsi</h2>
-        <p>Buat perancangan antarmuka pengguna (UI) menggunakan sistem High Fidelity untuk rancangan TaskMate. Selesaikan komponen UI hingga sesuai dengan user persona dan terintegrasi dengan modul HTML5 semantik.</p>
-      </section>
+      <div class="detail-grid">
 
-      <section>
+        <div class="preview">
+          <div class="preview-icon">▧</div>
+          <h2>PREVIEW PROYEK DESAIN</h2>
+          <p>Figma UI Mockup Wireframe</p>
+        </div>
+
+        <article class="task-details">
+
+          <div class="task-heading">
+            <h1>Tugas Desain UI</h1>
+            <span class="status">● Sedang</span>
+          </div>
+
+          <ul class="info-list">
+            <li>
+              <span class="info-icon">▧</span>
+              <span>24 Sep 2025</span>
+            </li>
+            <li>
+              <span class="info-icon">◷</span>
+              <span>09.00 - 11.00</span>
+            </li>
+            <li>
+              <span class="info-icon">▤</span>
+              <span style="color:#172033;">Desain Grafis</span>
+            </li>
+          </ul>
+
+          <section class="description">
+            <h2>Deskripsi</h2>
+            <p>
+              Buat prototipe antarmuka pengguna (UI) beresolusi tinggi
+              (High-Fidelity) untuk aplikasi mobile TaskMate menggunakan
+              Figma. Pastikan desain memperhatikan konsistensi sistem
+              desain, pedoman tipografi, skema warna aksesibel, serta tata
+              letak responsif. Tugas dikumpulkan dalam format tautan Figma
+              yang dapat diakses publik beserta tangkapan layar alur kerja utama.
+            </p>
+          </section>
+
+        </article>
+      </div>
+
+      <section class="subtasks">
         <h2>Sub-Tugas</h2>
-        <ul>
-          <li><input type="checkbox" id="sub1" checked> <label for="sub1">Membuat Wireframe Low Fidelity</label></li>
-          <li><input type="checkbox" id="sub2" checked> <label for="sub2">Menyusun High Fidelity UI Design</label></li>
-          <li><input type="checkbox" id="sub3"> <label for="sub3">Konversi Ke HTML5 Standar W3C</label></li>
+
+        <ul class="subtask-list">
+          <li>
+            <input type="checkbox" id="sub1" checked>
+            <label for="sub1">Membuat Wireframe Low Fidelity</label>
+          </li>
+          <li>
+            <input type="checkbox" id="sub2" checked>
+            <label for="sub2">Menyusun High Fidelity UI Design</label>
+          </li>
+          <li>
+            <input type="checkbox" id="sub3">
+            <label for="sub3">Konversi ke HTML5 Standar W3C</label>
+          </li>
         </ul>
       </section>
 
-      <footer>
-        <button type="button">Tandai Selesai</button>
+      <footer class="actions">
+        <a href="./tugas.html" class="btn">← Kembali</a>
+
+        <button type="button" class="btn btn-primary" id="completeBtn">
+          ✓ Tandai Selesai
+        </button>
       </footer>
-    </article>
-  </main>
+
+    </main>
+  </div>
+
+  <script>
+    const completeBtn = document.getElementById("completeBtn");
+
+    completeBtn.addEventListener("click", function () {
+      if (completeBtn.classList.contains("completed")) {
+        completeBtn.classList.remove("completed");
+        completeBtn.textContent = "✓ Tandai Selesai";
+      } else {
+        completeBtn.classList.add("completed");
+        completeBtn.textContent = "✓ Tugas Selesai";
+      }
+    });
+  </script>
 
 </body>
 </html>
