@@ -4,102 +4,583 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Daftar Tugas - TaskMate</title>
+  <style>
+    :root {
+      --bg-main: #f8fafc;
+      --bg-sidebar: #ffffff;
+      --primary: #4f46e5;
+      --primary-light: #eef2ff;
+      --text-main: #0f172a;
+      --text-muted: #64748b;
+      --border-color: #e2e8f0;
+      --card-bg: #ffffff;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    }
+
+    body {
+      background-color: var(--bg-main);
+      color: var(--text-main);
+      display: flex;
+      min-height: 100vh;
+    }
+
+    /* Sidebar Styling */
+    aside {
+      width: 260px;
+      background-color: var(--bg-sidebar);
+      border-right: 1px solid var(--border-color);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 24px 16px;
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 100vh;
+      z-index: 10;
+    }
+
+    .logo-area {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 0 12px 20px 12px;
+      border-bottom: 1px solid var(--border-color);
+      margin-bottom: 20px;
+    }
+
+    .logo-area img {
+      width: 28px;
+      height: 28px;
+    }
+
+    .logo-text h2 {
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--text-main);
+    }
+
+    .logo-text p {
+      font-size: 11px;
+      color: var(--text-muted);
+    }
+
+    aside nav ul {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    aside nav ul li a {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 10px 12px;
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 500;
+      border-radius: 8px;
+      transition: all 0.2s ease;
+    }
+
+    aside nav ul li a:hover,
+    aside nav ul li.active a {
+      background-color: var(--primary-light);
+      color: var(--primary);
+    }
+
+    aside nav ul li.active a {
+      font-weight: 600;
+    }
+
+    .sidebar-bottom {
+      border-top: 1px solid var(--border-color);
+      padding-top: 16px;
+    }
+
+    .sidebar-bottom a {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 10px 12px;
+      color: #ef4444;
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 500;
+      border-radius: 8px;
+    }
+
+    .sidebar-bottom a:hover {
+      background-color: #fee2e2;
+    }
+
+    /* Main Content */
+    main {
+      margin-left: 260px;
+      flex: 1;
+      padding: 32px;
+      width: calc(100% - 260px);
+    }
+
+    /* Top Navigation Bar */
+    .top-nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 28px;
+      padding-bottom: 16px;
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    .search-bar {
+      position: relative;
+      width: 400px;
+    }
+
+    .search-bar input {
+      width: 100%;
+      padding: 10px 16px 10px 40px;
+      border: 1px solid var(--border-color);
+      border-radius: 99px;
+      font-size: 13px;
+      background-color: #f8fafc;
+      outline: none;
+    }
+
+    .user-profile-nav {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .icon-btn {
+      background: #ffffff;
+      border: 1px solid var(--border-color);
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      position: relative;
+    }
+
+    .icon-btn::after {
+      content: '';
+      position: absolute;
+      top: 8px;
+      right: 9px;
+      width: 7px;
+      height: 7px;
+      background-color: #ef4444;
+      border-radius: 50%;
+    }
+
+    .profile-pill {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      background: #ffffff;
+      border: 1px solid var(--border-color);
+      padding: 4px 12px 4px 4px;
+      border-radius: 99px;
+      text-decoration: none;
+      color: inherit;
+    }
+
+    .profile-pill img {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      object-fit: cover;
+    }
+
+    .profile-info-nav h4 {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--text-main);
+    }
+
+    .profile-info-nav p {
+      font-size: 11px;
+      color: var(--text-muted);
+    }
+
+    /* Page Header */
+    .page-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 24px;
+    }
+
+    .page-header h1 {
+      font-size: 22px;
+      font-weight: 700;
+      color: var(--text-main);
+      margin-bottom: 4px;
+    }
+
+    .page-header p {
+      font-size: 13px;
+      color: var(--text-muted);
+    }
+
+    .btn-add-task {
+      background: var(--primary);
+      color: #ffffff;
+      padding: 10px 20px;
+      border-radius: 10px;
+      font-size: 13px;
+      font-weight: 600;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      box-shadow: 0 2px 4px rgba(79, 70, 229, 0.2);
+    }
+
+    .btn-add-task:hover {
+      background: #4338ca;
+    }
+
+    /* Filter Bar */
+    .filter-bar {
+      display: flex;
+      gap: 12px;
+      margin-bottom: 28px;
+    }
+
+    .filter-select {
+      background: #ffffff;
+      border: 1px solid var(--border-color);
+      padding: 10px 16px;
+      border-radius: 10px;
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--text-main);
+      outline: none;
+      cursor: pointer;
+      appearance: none;
+      background-image: url("data:image/svg+xml;charset=US-ASCII,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='%2364748b'%3E%3Cpath d='M2 4l4 4 4-4z'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 14px center;
+      padding-right: 36px;
+    }
+
+    /* Task Container Box */
+    .task-container-box {
+      background: var(--card-bg);
+      border: 1px solid var(--border-color);
+      border-radius: 16px;
+      padding: 12px 24px;
+      margin-bottom: 20px;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.02);
+    }
+
+    /* Task Article Item */
+    .task-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 18px 0;
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    .task-item:last-child {
+      border-bottom: none;
+    }
+
+    .task-left {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .task-icon-box {
+      width: 44px;
+      height: 44px;
+      border-radius: 12px;
+      background: var(--primary-light);
+      color: var(--primary);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+      flex-shrink: 0;
+    }
+
+    .task-info h3 {
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--text-main);
+      margin-bottom: 4px;
+    }
+
+    .task-info h3 a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .task-info h3 a:hover {
+      color: var(--primary);
+    }
+
+    .task-meta {
+      font-size: 12px;
+      color: var(--text-muted);
+      display: flex;
+      gap: 12px;
+    }
+
+    .task-right {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .badge-status {
+      font-size: 12px;
+      font-weight: 500;
+      padding: 4px 12px;
+      border-radius: 99px;
+    }
+
+    .badge-status.tunggu {
+      background: #fef3c7;
+      color: #d97706;
+    }
+
+    .badge-status.sedang {
+      background: #e0e7ff;
+      color: #4f46e5;
+    }
+
+    .badge-status.rendah {
+      background: #dcfce7;
+      color: #166534;
+    }
+
+    .btn-detail {
+      background: #ffffff;
+      border: 1px solid var(--border-color);
+      color: var(--text-main);
+      padding: 7px 14px;
+      border-radius: 8px;
+      font-size: 12px;
+      font-weight: 500;
+      text-decoration: none;
+      transition: background 0.2s;
+    }
+
+    .btn-detail:hover {
+      background: #f8fafc;
+    }
+
+    /* Footer Info Section */
+    .list-footer-info {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 12px;
+      color: var(--text-muted);
+      padding: 0 4px;
+    }
+
+    .footer-dots {
+      display: flex;
+      gap: 16px;
+    }
+
+    .dot-item {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+    }
+  </style>
 </head>
 <body>
 
-  <header>
-    <a href="./index.html">
-      <img src="./assets/image/logo-taskmate.svg" alt="Logo TaskMate">
-    </a>
-    <a href="./profil.html">
-      <img src="./assets/image/avatar-user.svg" alt="Foto Profil User">
-      <span>User</span>
-    </a>
-  </header>
-
+  <!-- SIDEBAR -->
   <aside>
-    <nav>
-      <ul>
-        <li><a href="./dashboard.html">Dashboard</a></li>
-        <li><a href="./tugas.html">Tugas</a></li>
-        <li><a href="./rekap.html">Rekap</a></li>
-        <li><a href="./profil.html">Profil</a></li>
-        <li><a href="./notifikasi.html">Notifikasi</a></li>
-        <li><a href="./setting.html">Pengaturan</a></li>
-        <li><a href="./login.html">Keluar</a></li>
-      </ul>
-    </nav>
+    <div class="sidebar-top">
+      <div class="logo-area">
+        <img src="./assets/image/logo-taskmate.svg" alt="Logo TaskMate">
+        <div class="logo-text">
+          <h2>TaskMate</h2>
+          <p>Student Workspace</p>
+        </div>
+      </div>
+      <nav>
+        <ul>
+          <li><a href="./dashboard.html">Dashboard</a></li>
+          <li class="active"><a href="./tugas.html">Tugas</a></li>
+          <li><a href="./rekap.html">Rekap</a></li>
+          <li><a href="./profil.html">Profil</a></li>
+        </ul>
+      </nav>
+    </div>
+    <div class="sidebar-bottom">
+      <a href="./login.html">Keluar</a>
+    </div>
   </aside>
 
+  <!-- KONTEN UTAMA -->
   <main>
-    <section>
-      <h1>Daftar Tugas</h1>
-      <p>Kelola semua tugas kuliah dan atur berdasarkan prioritas.</p>
-      <a href="./tambah-tugas.html">+ Tambah Tugas</a>
-    </section>
+    <!-- NAVIGASI ATAS -->
+    <div class="top-nav">
+      <div class="search-bar">
+        <input type="text" placeholder="Cari tugas...">
+      </div>
+      <div class="user-profile-nav">
+        <div class="icon-btn" title="Notifikasi"></div>
+        <a href="./profil.html" class="profile-pill">
+          <img src="./assets/image/avatar-user.svg" alt="User">
+          <div class="profile-info-nav">
+            <h4>User</h4>
+            <p>Mahasiswa</p>
+          </div>
+        </a>
+      </div>
+    </div>
 
-    <section>
-      <h2>Filter &amp; Urutkan</h2>
-      <form action="#" method="get">
-        <label for="filter-matkul">Mata Kuliah:</label>
-        <select id="filter-matkul" name="matkul">
-          <option value="semua">Semua Mata Kuliah</option>
-          <option value="desain-web">Desain Web</option>
-          <option value="basis-data">Basis Data</option>
-          <option value="pemrograman">Pemrograman</option>
-        </select>
+    <!-- HEADER HALAMAN -->
+    <div class="page-header">
+      <div>
+        <h1>Daftar Tugas</h1>
+        <p>Pantau dan kelola semua tugas akademik Anda secara teratur.</p>
+      </div>
+      <div>
+        <a href="./tambah-tugas.html" class="btn-add-task">+ Tambah Tugas</a>
+      </div>
+    </div>
 
-        <label for="filter-prioritas">Prioritas:</label>
-        <select id="filter-prioritas" name="prioritas">
-          <option value="semua">Semua Prioritas</option>
-          <option value="tinggi">Tinggi</option>
-          <option value="sedang">Sedang</option>
-          <option value="rendah">Rendah</option>
-        </select>
+    <!-- FILTER BAR -->
+    <div class="filter-bar">
+      <select class="filter-select">
+        <option value="semua">Semua Mata Kuliah</option>
+        <option value="desain-web">Desain Web</option>
+        <option value="basis-data">Basis Data</option>
+      </select>
+      <select class="filter-select">
+        <option value="semua">Semua Prioritas</option>
+        <option value="tinggi">Tinggi</option>
+        <option value="sedang">Sedang</option>
+        <option value="rendah">Rendah</option>
+      </select>
+      <select class="filter-select">
+        <option value="semua">Semua Status</option>
+        <option value="tunggu">Menunggu</option>
+        <option value="sedang">Sedang Berjalan</option>
+      </select>
+    </div>
 
-        <label for="filter-status">Status:</label>
-        <select id="filter-status" name="status">
-          <option value="semua">Semua Status</option>
-          <option value="terbaru">Belum Dikerjakan</option>
-          <option value="proses">Sedang Dikerjakan</option>
-          <option value="selesai">Selesai</option>
-        </select>
-
-        <button type="submit">Filter</button>
-      </form>
-    </section>
-
-    <section>
-      <h2>Daftar Item Tugas</h2>
-
-      <article>
-        <h3><a href="./detail-tugas.html">Tugas Desain UI</a></h3>
-        <p>Tenggat: 24 Mei 2026 | Mata Kuliah: Desain Web</p>
-        <p>Prioritas: <strong>Tinggi</strong> | Status: <strong>Sedang Dikerjakan</strong></p>
-        <a href="./detail-tugas.html">Lihat Detail</a>
+    <!-- DAFTAR ITEM TUGAS -->
+    <div class="task-container-box">
+      
+      <!-- Tugas 1 -->
+      <article class="task-item">
+        <div class="task-left">
+          <div class="task-icon-box">✏️</div>
+          <div class="task-info">
+            <h3><a href="./detail-tugas.html">Tugas Desain UI</a></h3>
+            <div class="task-meta">
+              <span>📅 24 Sep 2025</span>
+              <span>•</span>
+              <span>Desain Grafis</span>
+            </div>
+          </div>
+        </div>
+        <div class="task-right">
+          <span class="badge-status tunggu">Tunggu</span>
+          <a href="./detail-tugas.html" class="btn-detail">Lihat Detail</a>
+        </div>
       </article>
 
-      <article>
-        <h3>Laporan Praktikum</h3>
-        <p>Tenggat: 26 Mei 2026 | Mata Kuliah: Basis Data</p>
-        <p>Prioritas: <strong>Sedang</strong> | Status: <strong>Belum Dikerjakan</strong></p>
-        <a href="./detail-tugas.html">Lihat Detail</a>
+      <!-- Tugas 2 -->
+      <article class="task-item">
+        <div class="task-left">
+          <div class="task-icon-box">🧪</div>
+          <div class="task-info">
+            <h3><a href="./detail-tugas.html">Laporan Praktikum</a></h3>
+            <div class="task-meta">
+              <span>📅 26 Sep 2025</span>
+              <span>•</span>
+              <span>Basis Data</span>
+            </div>
+          </div>
+        </div>
+        <div class="task-right">
+          <span class="badge-status sedang">Sedang</span>
+          <a href="./detail-tugas.html" class="btn-detail">Lihat Detail</a>
+        </div>
       </article>
 
-      <article>
-        <h3>Ringkasan Materi</h3>
-        <p>Tenggat: 28 Mei 2026 | Mata Kuliah: Sistem Informasi</p>
-        <p>Prioritas: <strong>Rendah</strong> | Status: <strong>Selesai</strong></p>
-        <a href="./detail-tugas.html">Lihat Detail</a>
+      <!-- Tugas 3 -->
+      <article class="task-item">
+        <div class="task-left">
+          <div class="task-icon-box">📖</div>
+          <div class="task-info">
+            <h3><a href="./detail-tugas.html">Ringkasan Materi</a></h3>
+            <div class="task-meta">
+              <span>📅 28 Sep 2025</span>
+              <span>•</span>
+              <span>Sistem Operasi</span>
+            </div>
+          </div>
+        </div>
+        <div class="task-right">
+          <span class="badge-status rendah">Rendah</span>
+          <a href="./detail-tugas.html" class="btn-detail">Lihat Detail</a>
+        </div>
       </article>
 
-      <article>
-        <h3>Tugas Algoritma</h3>
-        <p>Tenggat: 30 Mei 2026 | Mata Kuliah: Pemrograman</p>
-        <p>Prioritas: <strong>Tinggi</strong> | Status: <strong>Belum Dikerjakan</strong></p>
-        <a href="./detail-tugas.html">Lihat Detail</a>
+      <!-- Tugas 4 -->
+      <article class="task-item">
+        <div class="task-left">
+          <div class="task-icon-box">💻</div>
+          <div class="task-info">
+            <h3><a href="./detail-tugas.html">Tugas Algoritma</a></h3>
+            <div class="task-meta">
+              <span>📅 30 Sep 2025</span>
+              <span>•</span>
+              <span>Algoritma & Pemrograman</span>
+            </div>
+          </div>
+        </div>
+        <div class="task-right">
+          <span class="badge-status tunggu">Tunggu</span>
+          <a href="./detail-tugas.html" class="btn-detail">Lihat Detail</a>
+        </div>
       </article>
-    </section>
+
+    </div>
+
+    <!-- FOOTER INFO JUMLAH TUGAS -->
+    <div class="list-footer-info">
+      <span>Menampilkan 4 dari 4 tugas tersisa</span>
+      <div class="footer-dots">
+        <div class="dot-item"><span class="dot" style="background: #d97706;"></span> 2 Menunggu</div>
+        <div class="dot-item"><span class="dot" style="background: #4f46e5;"></span> 1 Sedang Berjalan</div>
+        <div class="dot-item"><span class="dot" style="background: #10b981;"></span> 1 Prioritas Rendah</div>
+      </div>
+    </div>
+
   </main>
 
 </body>
