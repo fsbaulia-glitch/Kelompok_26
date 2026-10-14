@@ -4,62 +4,692 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Pengaturan - TaskMate</title>
+  <style>
+    :root {
+      --bg-main: #f8fafc;
+      --bg-sidebar: #ffffff;
+      --primary: #4f46e5;
+      --primary-light: #eef2ff;
+      --text-main: #0f172a;
+      --text-muted: #64748b;
+      --border-color: #e2e8f0;
+      --card-bg: #ffffff;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    }
+
+    body {
+      background-color: var(--bg-main);
+      color: var(--text-main);
+      display: flex;
+      min-height: 100vh;
+    }
+
+    /* Sidebar Styling */
+    aside {
+      width: 260px;
+      background-color: var(--bg-sidebar);
+      border-right: 1px solid var(--border-color);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 24px 16px;
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 100vh;
+      z-index: 10;
+    }
+
+    .logo-area {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 0 12px 20px 12px;
+      border-bottom: 1px solid var(--border-color);
+      margin-bottom: 20px;
+    }
+
+    .logo-area img {
+      width: 28px;
+      height: 28px;
+    }
+
+    .logo-text h2 {
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--text-main);
+    }
+
+    .logo-text p {
+      font-size: 11px;
+      color: var(--text-muted);
+    }
+
+    aside nav ul {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    aside nav ul li a {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 10px 12px;
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 500;
+      border-radius: 8px;
+      transition: all 0.2s ease;
+    }
+
+    aside nav ul li a:hover,
+    aside nav ul li.active a {
+      background-color: var(--primary-light);
+      color: var(--primary);
+    }
+
+    aside nav ul li.active a {
+      font-weight: 600;
+    }
+
+    .sidebar-bottom {
+      border-top: 1px solid var(--border-color);
+      padding-top: 16px;
+    }
+
+    .sidebar-bottom a {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 10px 12px;
+      color: #ef4444;
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 500;
+      border-radius: 8px;
+    }
+
+    .sidebar-bottom a:hover {
+      background-color: #fee2e2;
+    }
+
+    /* Main Content */
+    main {
+      margin-left: 260px;
+      flex: 1;
+      padding: 32px;
+      width: calc(100% - 260px);
+    }
+
+    /* Breadcrumb & Header */
+    .breadcrumb {
+      font-size: 12px;
+      color: var(--text-muted);
+      margin-bottom: 6px;
+    }
+
+    .page-header-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 12px;
+    }
+
+    .page-header h1 {
+      font-size: 22px;
+      font-weight: 700;
+      color: var(--text-main);
+      margin-bottom: 4px;
+    }
+
+    .page-header p {
+      font-size: 13px;
+      color: var(--text-muted);
+    }
+
+    .badge-cloud {
+      background-color: #f0fdf4;
+      color: #15803d;
+      border: 1px solid #bbf7d0;
+      padding: 6px 12px;
+      border-radius: 99px;
+      font-size: 12px;
+      font-weight: 500;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    /* Tabs Navigation */
+    .settings-tabs {
+      display: flex;
+      gap: 8px;
+      background: #f1f5f9;
+      padding: 4px;
+      border-radius: 12px;
+      margin-bottom: 24px;
+      width: fit-content;
+    }
+
+    .settings-tabs a {
+      text-decoration: none;
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--text-muted);
+      padding: 8px 16px;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .settings-tabs a.active {
+      background: #ffffff;
+      color: var(--text-main);
+      font-weight: 600;
+      box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+    }
+
+    /* Layout Grid (Left Content & Right Cards) */
+    .settings-layout {
+      display: grid;
+      grid-template-columns: 2fr 1fr;
+      gap: 24px;
+      align-items: start;
+    }
+
+    /* Left Column: Notification Main Box */
+    .settings-main-box {
+      background: var(--card-bg);
+      border: 1px solid var(--border-color);
+      border-radius: 16px;
+      padding: 24px;
+    }
+
+    .box-header-flex {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+      padding-bottom: 16px;
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    .box-title-area {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .box-icon {
+      width: 36px;
+      height: 36px;
+      border-radius: 8px;
+      background: var(--primary-light);
+      color: var(--primary);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 16px;
+    }
+
+    .box-title-area h3 {
+      font-size: 15px;
+      font-weight: 700;
+    }
+
+    .box-title-area p {
+      font-size: 12px;
+      color: var(--text-muted);
+    }
+
+    .badge-count {
+      background: var(--primary-light);
+      color: var(--primary);
+      font-size: 11px;
+      font-weight: 600;
+      padding: 4px 10px;
+      border-radius: 99px;
+    }
+
+    /* Setting Sub-Items */
+    .setting-item-list {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .setting-row {
+      background: #f8fafc;
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      padding: 16px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .setting-row-info {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+    }
+
+    .setting-row-icon {
+      font-size: 16px;
+      margin-top: 2px;
+    }
+
+    .setting-row-text h4 {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--text-main);
+      margin-bottom: 4px;
+    }
+
+    .setting-row-text p {
+      font-size: 12px;
+      color: var(--text-muted);
+      line-height: 1.4;
+      max-width: 360px;
+    }
+
+    /* Custom Toggle Switch */
+    .switch {
+      position: relative;
+      display: inline-block;
+      width: 44px;
+      height: 24px;
+      flex-shrink: 0;
+    }
+
+    .switch input {
+      opacity: 0;
+      width: 0;
+      height: 0;
+    }
+
+    .slider {
+      position: absolute;
+      cursor: pointer;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background-color: #cbd5e1;
+      transition: .3s;
+      border-radius: 24px;
+    }
+
+    .slider:before {
+      position: absolute;
+      content: "";
+      height: 18px;
+      width: 18px;
+      left: 3px;
+      bottom: 3px;
+      background-color: white;
+      transition: .3s;
+      border-radius: 50%;
+    }
+
+    input:checked + .slider {
+      background-color: var(--primary);
+    }
+
+    input:checked + .slider:before {
+      transform: translateX(20px);
+    }
+
+    /* Right Column Sidebar Cards */
+    .right-sidebar-col {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .side-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border-color);
+      border-radius: 16px;
+      padding: 20px;
+    }
+
+    .side-card-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 16px;
+    }
+
+    .side-card-header span {
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .badge-active {
+      color: #10b981;
+      font-weight: 600;
+      font-size: 11px;
+    }
+
+    .user-mini-profile {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 16px;
+    }
+
+    .user-mini-avatar {
+      width: 44px;
+      height: 44px;
+      border-radius: 12px;
+      background: var(--primary);
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+    }
+
+    .user-mini-info h4 {
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--text-main);
+    }
+
+    .user-mini-info p {
+      font-size: 11px;
+      color: var(--text-muted);
+    }
+
+    .user-mini-info span {
+      font-size: 11px;
+      color: var(--primary);
+      font-weight: 500;
+    }
+
+    .meta-list {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-bottom: 16px;
+      font-size: 12px;
+    }
+
+    .meta-row {
+      display: flex;
+      justify-content: space-between;
+      color: var(--text-muted);
+      background: #f8fafc;
+      padding: 8px 12px;
+      border-radius: 8px;
+    }
+
+    .meta-row strong {
+      color: var(--text-main);
+    }
+
+    .btn-full {
+      width: 100%;
+      background: var(--primary-light);
+      color: var(--primary);
+      border: none;
+      padding: 10px;
+      border-radius: 8px;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      text-align: center;
+      display: block;
+      text-decoration: none;
+    }
+
+    .btn-full:hover {
+      background: #e0e7ff;
+    }
+
+    /* Kanal Notifikasi Section */
+    .canal-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 12px;
+    }
+
+    .canal-header h4 {
+      font-size: 14px;
+      font-weight: 700;
+    }
+
+    .canal-desc {
+      font-size: 11px;
+      color: var(--text-muted);
+      line-height: 1.4;
+      margin-bottom: 16px;
+    }
+
+    .canal-list {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .canal-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: #f8fafc;
+      border: 1px solid var(--border-color);
+      padding: 10px 12px;
+      border-radius: 8px;
+      font-size: 12px;
+    }
+
+    .canal-item-left {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--text-main);
+      font-weight: 500;
+    }
+
+    .canal-action-link {
+      color: var(--primary);
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 11px;
+    }
+
+    .canal-status-check {
+      color: var(--primary);
+      font-size: 14px;
+    }
+  </style>
 </head>
 <body>
 
-  <header>
-    <a href="./index.html">
-      <img src="./assets/image/logo-taskmate.svg" alt="Logo TaskMate">
-    </a>
-  </header>
-
+  <!-- SIDEBAR -->
   <aside>
-    <nav>
-      <ul>
-        <li><a href="./dashboard.html">Dashboard</a></li>
-        <li><a href="./tugas.html">Tugas</a></li>
-        <li><a href="./rekap.html">Rekap</a></li>
-        <li><a href="./profil.html">Profil</a></li>
-        <li><a href="./notifikasi.html">Notifikasi</a></li>
-        <li><a href="./setting.html">Pengaturan</a></li>
-        <li><a href="./login.html">Keluar</a></li>
-      </ul>
-    </nav>
+    <div class="sidebar-top">
+      <div class="logo-area">
+        <img src="./assets/image/logo-taskmate.svg" alt="Logo TaskMate">
+        <div class="logo-text">
+          <h2>TaskMate</h2>
+          <p>Workspace Akademik</p>
+        </div>
+      </div>
+      <nav>
+        <ul>
+          <li><a href="./dashboard.html">Dashboard</a></li>
+          <li><a href="./tugas.html">Tugas</a></li>
+          <li><a href="./rekap.html">Rekap</a></li>
+          <li class="active"><a href="./profil.html">Profil</a></li>
+          <li><a href="./notifikasi.html">Notifikasi</a></li>
+          <li><a href="./setting.html">Pengaturan</a></li>
+        </ul>
+      </nav>
+    </div>
+    <div class="sidebar-bottom">
+      <a href="./login.html">Keluar</a>
+    </div>
   </aside>
 
+  <!-- KONTEN UTAMA -->
   <main>
-    <section>
-      <h1>Pengaturan</h1>
-      <p>Atur preferensi notifikasi dan tampilan lingkungan kerja TaskMate Anda.</p>
+    <div class="breadcrumb">Profil / Pengaturan</div>
+    
+    <div class="page-header-row">
+      <div class="page-header">
+        <h1>Pengaturan</h1>
+        <p>Kelola preferensi notifikasi, tampilan sistem, dan konfigurasi lingkungan kerja TaskMate Anda.</p>
+      </div>
+      <div>
+        <span class="badge-cloud">● Preferensi Cloud Tersinkron</span>
+      </div>
+    </div>
 
-      <form action="#" method="post">
-        <fieldset>
-          <legend>Preferensi Notifikasi</legend>
-          <p>
-            <input type="checkbox" id="pengingat-deadline" name="pengingat_deadline" checked>
-            <label for="pengingat-deadline">Pengingat Deadline</label>
-          </p>
-          <p>
-            <input type="checkbox" id="notif-tugas-baru" name="notif_tugas_baru" checked>
-            <label for="notif-tugas-baru">Notifikasi Tugas Baru</label>
-          </p>
-          <p>
-            <input type="checkbox" id="notif-selesai" name="notif_selesai">
-            <label for="notif-selesai">Notifikasi Tugas Selesai</label>
-          </p>
-        </fieldset>
+    <!-- TABS NAVIGASI -->
+    <div class="settings-tabs">
+      <a href="#" class="active">⚙️ Preferensi Umum</a>
+      <a href="#">🔔 Notifikasi & Suara</a>
+      <a href="#">🛡️ Keamanan</a>
+      <a href="#">🔗 Aplikasi Terhubung</a>
+    </div>
 
-        <fieldset>
-          <legend>Tema Tampilan</legend>
-          <p>
-            <input type="checkbox" id="mode-gelap" name="mode_gelap">
-            <label for="mode-gelap">Aktifkan Mode Gelap (Dark Mode)</label>
-          </p>
-        </fieldset>
+    <!-- LAYOUT UTAMA PENGATURAN -->
+    <div class="settings-layout">
+      
+      <!-- KOLOM KIRI: NOTIFIKASI -->
+      <div class="settings-main-box">
+        <div class="box-header-flex">
+          <div class="box-title-area">
+            <div class="box-icon">🔔</div>
+            <div>
+              <h3>Notifikasi</h3>
+              <p>Tentukan frekuensi pemberitahuan dan batas peringatan tenggat waktu tugas.</p>
+            </div>
+          </div>
+          <span class="badge-count">3 Aktif</span>
+        </div>
 
-        <button type="submit">Simpan Perubahan</button>
-      </form>
-    </section>
+        <form action="#" method="post">
+          <div class="setting-item-list">
+            
+            <!-- Item 1: Pengingat Deadline -->
+            <div class="setting-row">
+              <div class="setting-row-info">
+                <span class="setting-row-icon">⏰</span>
+                <div class="setting-row-text">
+                  <h4>Pengingat Deadline</h4>
+                  <p>Kirimkan notifikasi berkala 24 jam dan 2 jam sebelum tenggat waktu tugas berakhir.</p>
+                </div>
+              </div>
+              <label class="switch">
+                <input type="checkbox" name="pengingat_deadline" checked>
+                <span class="slider"></span>
+              </label>
+            </div>
+
+            <!-- Item 2: Notifikasi Tugas Baru -->
+            <div class="setting-row">
+              <div class="setting-row-info">
+                <span class="setting-row-icon">📥</span>
+                <div class="setting-row-text">
+                  <h4>Notifikasi Tugas Baru</h4>
+                  <p>Dapatkan pemberitahuan seketika saat dosen atau rekan kelompok merilis tugas baru.</p>
+                </div>
+              </div>
+              <label class="switch">
+                <input type="checkbox" name="notif_tugas_baru" checked>
+                <span class="slider"></span>
+              </label>
+            </div>
+
+            <!-- Item 3: Notifikasi Selesai -->
+            <div class="setting-row">
+              <div class="setting-row-info">
+                <span class="setting-row-icon">✅</span>
+                <div class="setting-row-text">
+                  <h4>Notifikasi Selesai</h4>
+                  <p>Konfirmasi otomatis saat tugas yang Anda unggah berhasil diverifikasi atau dinilai.</p>
+                </div>
+              </div>
+              <label class="switch">
+                <input type="checkbox" name="notif_selesai" checked>
+                <span class="slider"></span>
+              </label>
+            </div>
+
+          </div>
+        </form>
+      </div>
+
+      <!-- KOLOM KANAN: SIDEBAR PROFILE & KANAL NOTIFIKASI -->
+      <div class="right-sidebar-col">
+        
+        <!-- Kartu Akun Terdaftar -->
+        <div class="side-card">
+          <div class="side-card-header">
+            <span>Akun Terdaftar</span>
+            <span class="badge-active">Aktif</span>
+          </div>
+          <div class="user-mini-profile">
+            <div class="user-mini-avatar">🎓</div>
+            <div class="user-mini-info">
+              <h4>Sarah Putri Maharani</h4>
+              <p>sarah.putri@kampus.ac.id</p>
+              <span>Teknik Informatika • Sem 6</span>
+            </div>
+          </div>
+          <div class="meta-list">
+            <div class="meta-row">
+              <span>Zona Waktu</span>
+              <strong>Asia/Jakarta (WIB)</strong>
+            </div>
+            <div class="meta-row">
+              <span>Bahasa Sistem</span>
+              <strong>Bahasa Indonesia</strong>
+            </div>
+          </div>
+          <a href="./profil.html" class="btn-full">Buka Profil Lengkap</a>
+        </div>
+
+        <!-- Kartu Kanal Notifikasi -->
+        <div class="side-card">
+          <div class="canal-header">
+            <h4>Kanal Notifikasi</h4>
+            <span>📡</span>
+          </div>
+          <p class="canal-desc">Pemberitahuan deadline disalurkan melalui jalur berikut sesuai ketersediaan aplikasi:</p>
+          <div class="canal-list">
+            <div class="canal-item">
+              <div class="canal-item-left">✉️ Email Kampus</div>
+              <span class="canal-status-check">✓</span>
+            </div>
+            <div class="canal-item">
+              <div class="canal-item-left">💻 Push Browser Web</div>
+              <span class="canal-status-check">✓</span>
+            </div>
+            <div class="canal-item">
+              <div class="canal-item-left">💬 Telegram Bot</div>
+              <a href="#" class="canal-action-link">Hubungkan</a>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
   </main>
 
 </body>
