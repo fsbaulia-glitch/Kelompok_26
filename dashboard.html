@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard - TaskMate</title>
+</head>
+<body>
+
+  <header>
+    <a href="./index.html">
+      <img src="./assets/images/logo-taskmate.svg" alt="Logo TaskMate">
+    </a>
+    <form action="#" method="get">
+      <label for="search-dashboard">Cari Tugas...</label>
+      <input type="search" id="search-dashboard" name="q" placeholder="Cari tugas...">
+      <button type="submit">Cari</button>
+    </form>
+    <div>
+      <a href="./profil.html">
+        <img src="./assets/images/avatar-user.svg" alt="Foto Profil User">
+        <span>User</span>
+      </a>
+    </div>
+  </header>
+
+  <aside>
+    <nav>
+      <ul>
+        <li><a href="./dashboard.html">Dashboard</a></li>
+        <li><a href="./tugas.html">Tugas</a></li>
+        <li><a href="./rekap.html">Rekap</a></li>
+        <li><a href="./profil.html">Profil</a></li>
+        <li><a href="./notifikasi.html">Notifikasi</a></li>
+        <li><a href="./setting.html">Pengaturan</a></li>
+        <li><a href="./login.html">Keluar</a></li>
+      </ul>
+    </nav>
+  </aside>
+
+  <main>
+    <section>
+      <h1>Selamat datang, User!</h1>
+      <p>Kelola tugas akademik dan atur jadwal pengerjaan tugas kamu hari ini.</p>
+
+      <ul>
+        <li>
+          <strong>Total Tugas</strong>
+          <p>8 Tugas</p>
+        </li>
+        <li>
+          <strong>Selesai</strong>
+          <p>3 Tugas</p>
+        </li>
+        <li>
+          <strong>Sedang Dikerjakan</strong>
+          <p>5 Tugas</p>
+        </li>
+        <li>
+          <strong>Terlambat</strong>
+          <p>1 Tugas</p>
+        </li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>Tugas Hari Ini</h2>
+      <ul>
+        <li>
+          <input type="checkbox" id="task-1">
+          <label for="task-1"><a href="./detail-tugas.html">Desain Wireframe UI/UX</a> - Desain Web (08:00 WIB)</label>
+        </li>
+        <li>
+          <input type="checkbox" id="task-2">
+          <label for="task-2">Review Makalah Algoritma - Pemrograman (13:00 WIB)</label>
+        </li>
+        <li>
+          <input type="checkbox" id="task-3">
+          <label for="task-3">Diskusi Kelompok Basis Data - Sistem Informasi (16:00 WIB)</label>
+        </li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>Deadline Terdekat</h2>
+      <ul>
+        <li>
+          <h3><a href="./detail-tugas.html">Tugas Desain UI</a></h3>
+          <p>Mata Kuliah: Desain Web | Tenggat: 24 Mei 2026</p>
+        </li>
+        <li>
+          <h3>Laporan Praktikum Basis Data</h3>
+          <p>Mata Kuliah: Basis Data | Tenggat: 26 Mei 2026</p>
+        </li>
+        <li>
+          <h3>Ringkasan Materi AI</h3>
+          <p>Mata Kuliah: Kecerdasan Buatan | Tenggat: 28 Mei 2026</p>
+        </li>
+      </ul>
+    </section>
+  </main>
+
+</body>
+</html>

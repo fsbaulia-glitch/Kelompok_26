@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login - TaskMate</title>
+</head>
+<body>
+
+  <header>
+    <a href="./index.html">
+      <img src="./assets/images/logo-taskmate.svg" alt="Logo TaskMate">
+    </a>
+  </header>
+
+  <main>
+    <section>
+      <h1>Selamat Datang Kembali</h1>
+      <p>Masuk ke akun Anda untuk melanjutkan manajemen tugas.</p>
+
+      <form action="./dashboard.html" method="post">
+        <p>
+          <label for="login-email">Email atau Username:</label><br>
+          <input type="text" id="login-email" name="username_email" placeholder="Masukkan email atau username" required>
+        </p>
+
+        <p>
+          <label for="login-password">Password:</label><br>
+          <input type="password" id="login-password" name="password" placeholder="Masukkan kata sandi" required>
+        </p>
+
+        <p>
+          <button type="submit">Login</button>
+        </p>
+      </form>
+
+      <p>Belum punya akun? <a href="./register.html">Daftar di sini</a></p>
+    </section>
+  </main>
+
+  <footer>
+    <p>&copy; 2026 TaskMate. All rights reserved.</p>
+  </footer>
+
+</body>
+</html>

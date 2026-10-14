@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Daftar Tugas - TaskMate</title>
+</head>
+<body>
+
+  <header>
+    <a href="./index.html">
+      <img src="./assets/images/logo-taskmate.svg" alt="Logo TaskMate">
+    </a>
+    <a href="./profil.html">
+      <img src="./assets/images/avatar-user.svg" alt="Foto Profil User">
+      <span>User</span>
+    </a>
+  </header>
+
+  <aside>
+    <nav>
+      <ul>
+        <li><a href="./dashboard.html">Dashboard</a></li>
+        <li><a href="./tugas.html">Tugas</a></li>
+        <li><a href="./rekap.html">Rekap</a></li>
+        <li><a href="./profil.html">Profil</a></li>
+        <li><a href="./notifikasi.html">Notifikasi</a></li>
+        <li><a href="./setting.html">Pengaturan</a></li>
+        <li><a href="./login.html">Keluar</a></li>
+      </ul>
+    </nav>
+  </aside>
+
+  <main>
+    <section>
+      <h1>Daftar Tugas</h1>
+      <p>Kelola semua tugas kuliah dan atur berdasarkan prioritas.</p>
+      <a href="./tambah-tugas.html">+ Tambah Tugas</a>
+    </section>
+
+    <section>
+      <h2>Filter &amp; Urutkan</h2>
+      <form action="#" method="get">
+        <label for="filter-matkul">Mata Kuliah:</label>
+        <select id="filter-matkul" name="matkul">
+          <option value="semua">Semua Mata Kuliah</option>
+          <option value="desain-web">Desain Web</option>
+          <option value="basis-data">Basis Data</option>
+          <option value="pemrograman">Pemrograman</option>
+        </select>
+
+        <label for="filter-prioritas">Prioritas:</label>
+        <select id="filter-prioritas" name="prioritas">
+          <option value="semua">Semua Prioritas</option>
+          <option value="tinggi">Tinggi</option>
+          <option value="sedang">Sedang</option>
+          <option value="rendah">Rendah</option>
+        </select>
+
+        <label for="filter-status">Status:</label>
+        <select id="filter-status" name="status">
+          <option value="semua">Semua Status</option>
+          <option value="terbaru">Belum Dikerjakan</option>
+          <option value="proses">Sedang Dikerjakan</option>
+          <option value="selesai">Selesai</option>
+        </select>
+
+        <button type="submit">Filter</button>
+      </form>
+    </section>
+
+    <section>
+      <h2>Daftar Item Tugas</h2>
+
+      <article>
+        <h3><a href="./detail-tugas.html">Tugas Desain UI</a></h3>
+        <p>Tenggat: 24 Mei 2026 | Mata Kuliah: Desain Web</p>
+        <p>Prioritas: <strong>Tinggi</strong> | Status: <strong>Sedang Dikerjakan</strong></p>
+        <a href="./detail-tugas.html">Lihat Detail</a>
+      </article>
+
+      <article>
+        <h3>Laporan Praktikum</h3>
+        <p>Tenggat: 26 Mei 2026 | Mata Kuliah: Basis Data</p>
+        <p>Prioritas: <strong>Sedang</strong> | Status: <strong>Belum Dikerjakan</strong></p>
+        <a href="./detail-tugas.html">Lihat Detail</a>
+      </article>
+
+      <article>
+        <h3>Ringkasan Materi</h3>
+        <p>Tenggat: 28 Mei 2026 | Mata Kuliah: Sistem Informasi</p>
+        <p>Prioritas: <strong>Rendah</strong> | Status: <strong>Selesai</strong></p>
+        <a href="./detail-tugas.html">Lihat Detail</a>
+      </article>
+
+      <article>
+        <h3>Tugas Algoritma</h3>
+        <p>Tenggat: 30 Mei 2026 | Mata Kuliah: Pemrograman</p>
+        <p>Prioritas: <strong>Tinggi</strong> | Status: <strong>Belum Dikerjakan</strong></p>
+        <a href="./detail-tugas.html">Lihat Detail</a>
+      </article>
+    </section>
+  </main>
+
+</body>
+</html>

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Daftar Akun Baru - TaskMate</title>
+</head>
+<body>
+
+  <header>
+    <a href="./index.html">
+      <img src="./assets/images/logo-taskmate.svg" alt="Logo TaskMate">
+    </a>
+  </header>
+
+  <main>
+    <section>
+      <h1>Buat Akun Baru</h1>
+      <p>Mulai kelola tugas Anda dengan lebih mudah dan terorganisir.</p>
+
+      <form action="./dashboard.html" method="post">
+        <p>
+          <label for="reg-nama">Nama Lengkap:</label><br>
+          <input type="text" id="reg-nama" name="nama_lengkap" placeholder="Masukkan nama lengkap" required>
+        </p>
+
+        <p>
+          <label for="reg-email">Email Mahasiswa:</label><br>
+          <input type="email" id="reg-email" name="email" placeholder="contoh@mahasiswa.ac.id" required>
+        </p>
+
+        <p>
+          <label for="reg-password">Password:</label><br>
+          <input type="password" id="reg-password" name="password" placeholder="Buat kata sandi minimal 8 karakter" required>
+        </p>
+
+        <p>
+          <button type="submit">Daftar Akun</button>
+        </p>
+      </form>
+
+      <p>Sudah punya akun? <a href="./login.html">Login di sini</a></p>
+    </section>
+  </main>
+
+  <footer>
+    <p>&copy; 2026 TaskMate. All rights reserved.</p>
+  </footer>
+
+</body>
+</html>

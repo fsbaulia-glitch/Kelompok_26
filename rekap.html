@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Rekap Tugas - TaskMate</title>
+</head>
+<body>
+
+  <header>
+    <a href="./index.html">
+      <img src="./assets/images/logo-taskmate.svg" alt="Logo TaskMate">
+    </a>
+    <a href="./profil.html">
+      <img src="./assets/images/avatar-user.svg" alt="Foto Profil User">
+      <span>User</span>
+    </a>
+  </header>
+
+  <aside>
+    <nav>
+      <ul>
+        <li><a href="./dashboard.html">Dashboard</a></li>
+        <li><a href="./tugas.html">Tugas</a></li>
+        <li><a href="./rekap.html">Rekap</a></li>
+        <li><a href="./profil.html">Profil</a></li>
+        <li><a href="./notifikasi.html">Notifikasi</a></li>
+        <li><a href="./setting.html">Pengaturan</a></li>
+        <li><a href="./login.html">Keluar</a></li>
+      </ul>
+    </nav>
+  </aside>
+
+  <main>
+    <section>
+      <h1>Rekap Tugas</h1>
+      <p>Ringkasan performa dan grafik penyelesaian tugas akademik Anda.</p>
+
+      <nav>
+        <ul>
+          <li><a href="#mingguan">Mingguan</a></li>
+          <li><a href="#bulanan">Bulanan</a></li>
+          <li><a href="#semester">Semester</a></li>
+        </ul>
+      </nav>
+    </section>
+
+    <section id="grafik">
+      <h2>Frekuensi Tugas Diselesaikan</h2>
+      <figure>
+        <img src="./assets/images/chart-rekap.svg" alt="Grafik Batang Statistik Frekuensi Tugas Diselesaikan">
+        <figcaption>Grafik aktivitas penyelesaian tugas harian.</figcaption>
+      </figure>
+    </section>
+
+    <section id="ringkasan-status">
+      <h2>Ringkasan Status</h2>
+      <table>
+        <caption>Statistik Ringkasan Pengerjaan Tugas</caption>
+        <thead>
+          <tr>
+            <th scope="col">Status Tugas</th>
+            <th scope="col">Jumlah</th>
+            <th scope="col">Persentase</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th scope="row">Total Tugas</th>
+            <td>20</td>
+            <td>100%</td>
+          </tr>
+          <tr>
+            <th scope="row">Selesai</th>
+            <td>12</td>
+            <td>60%</td>
+          </tr>
+          <tr>
+            <th scope="row">Sedang Dikerjakan</th>
+            <td>3</td>
+            <td>15%</td>
+          </tr>
+          <tr>
+            <th scope="row">Belum / Terlambat</th>
+            <td>5</td>
+            <td>25%</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+  </main>
+
+</body>
+</html>

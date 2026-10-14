@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pengaturan - TaskMate</title>
+</head>
+<body>
+
+  <header>
+    <a href="./index.html">
+      <img src="./assets/images/logo-taskmate.svg" alt="Logo TaskMate">
+    </a>
+  </header>
+
+  <aside>
+    <nav>
+      <ul>
+        <li><a href="./dashboard.html">Dashboard</a></li>
+        <li><a href="./tugas.html">Tugas</a></li>
+        <li><a href="./rekap.html">Rekap</a></li>
+        <li><a href="./profil.html">Profil</a></li>
+        <li><a href="./notifikasi.html">Notifikasi</a></li>
+        <li><a href="./setting.html">Pengaturan</a></li>
+        <li><a href="./login.html">Keluar</a></li>
+      </ul>
+    </nav>
+  </aside>
+
+  <main>
+    <section>
+      <h1>Pengaturan</h1>
+      <p>Atur preferensi notifikasi dan tampilan lingkungan kerja TaskMate Anda.</p>
+
+      <form action="#" method="post">
+        <fieldset>
+          <legend>Preferensi Notifikasi</legend>
+          <p>
+            <input type="checkbox" id="pengingat-deadline" name="pengingat_deadline" checked>
+            <label for="pengingat-deadline">Pengingat Deadline</label>
+          </p>
+          <p>
+            <input type="checkbox" id="notif-tugas-baru" name="notif_tugas_baru" checked>
+            <label for="notif-tugas-baru">Notifikasi Tugas Baru</label>
+          </p>
+          <p>
+            <input type="checkbox" id="notif-selesai" name="notif_selesai">
+            <label for="notif-selesai">Notifikasi Tugas Selesai</label>
+          </p>
+        </fieldset>
+
+        <fieldset>
+          <legend>Tema Tampilan</legend>
+          <p>
+            <input type="checkbox" id="mode-gelap" name="mode_gelap">
+            <label for="mode-gelap">Aktifkan Mode Gelap (Dark Mode)</label>
+          </p>
+        </fieldset>
+
+        <button type="submit">Simpan Perubahan</button>
+      </form>
+    </section>
+  </main>
+
+</body>
+</html>

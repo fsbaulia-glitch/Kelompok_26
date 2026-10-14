@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tambah Tugas - TaskMate</title>
+</head>
+<body>
+
+  <header>
+    <a href="./index.html">
+      <img src="./assets/images/logo-taskmate.svg" alt="Logo TaskMate">
+    </a>
+  </header>
+
+  <aside>
+    <nav>
+      <ul>
+        <li><a href="./dashboard.html">Dashboard</a></li>
+        <li><a href="./tugas.html">Tugas</a></li>
+        <li><a href="./rekap.html">Rekap</a></li>
+        <li><a href="./profil.html">Profil</a></li>
+        <li><a href="./notifikasi.html">Notifikasi</a></li>
+        <li><a href="./setting.html">Pengaturan</a></li>
+        <li><a href="./login.html">Keluar</a></li>
+      </ul>
+    </nav>
+  </aside>
+
+  <main>
+    <section>
+      <a href="./tugas.html">&larr; Kembali ke Daftar Tugas</a>
+      <h1>Tambah Tugas Baru</h1>
+
+      <form action="#" method="post">
+        <fieldset>
+          <legend>Detail Tugas</legend>
+
+          <p>
+            <label for="nama-tugas">Nama Tugas *</label><br>
+            <input type="text" id="nama-tugas" name="nama_tugas" placeholder="Masukkan nama tugas" required>
+          </p>
+
+          <p>
+            <label for="matkul">Mata Kuliah *</label><br>
+            <select id="matkul" name="mata_kuliah" required>
+              <option value="">Pilih Mata Kuliah</option>
+              <option value="desain-web">Desain Web</option>
+              <option value="basis-data">Basis Data</option>
+              <option value="pemrograman">Pemrograman</option>
+            </select>
+          </p>
+
+          <p>
+            <label for="deskripsi">Deskripsi</label><br>
+            <textarea id="deskripsi" name="deskripsi" rows="4" placeholder="Tulis deskripsi atau instruksi tugas..."></textarea>
+          </p>
+        </fieldset>
+
+        <fieldset>
+          <legend>Jadwal &amp; Prioritas</legend>
+
+          <p>
+            <label for="deadline">Deadline *</label><br>
+            <input type="date" id="deadline" name="deadline" required>
+          </p>
+
+          <p>
+            <label for="estimasi">Estimasi Waktu Pengerjaan *</label><br>
+            <select id="estimasi" name="estimasi_waktu" required>
+              <option value="">Pilih Estimasi Waktu</option>
+              <option value="1-2-jam">1 - 2 Jam</option>
+              <option value="3-5-jam">3 - 5 Jam</option>
+              <option value="1-hari">1 Hari atau Lebih</option>
+            </select>
+          </p>
+
+          <p>
+            <label for="prioritas">Tingkat Prioritas *</label><br>
+            <select id="prioritas" name="prioritas" required>
+              <option value="">Pilih Prioritas</option>
+              <option value="tinggi">Tinggi</option>
+              <option value="sedang">Sedang</option>
+              <option value="rendah">Rendah</option>
+            </select>
+          </p>
+        </fieldset>
+
+        <p>
+          <a href="./tugas.html">Batal</a>
+          <button type="submit">Simpan Tugas</button>
+        </p>
+      </form>
+    </section>
+  </main>
+
+</body>
+</html>
