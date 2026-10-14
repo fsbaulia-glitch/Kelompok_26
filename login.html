@@ -1,46 +1,426 @@
+```html
 <!DOCTYPE html>
 <html lang="id">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Login - TaskMate</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - TaskMate</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background: #f5f7ff;
+            color: #192238;
+            min-height: 100vh;
+        }
+
+        header {
+            width: 100%;
+            padding: 24px 4%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: #f8faff;
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+            color: #192238;
+            font-size: 22px;
+            font-weight: bold;
+        }
+
+        .brand img {
+            width: 44px;
+            height: 44px;
+            object-fit: contain;
+        }
+
+        .header-link {
+            color: #64748b;
+            font-size: 14px;
+        }
+
+        .header-link a {
+            color: #5145ff;
+            text-decoration: none;
+            font-weight: bold;
+            margin-left: 12px;
+        }
+
+        main {
+            min-height: calc(100vh - 92px);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 32px 20px;
+        }
+
+        .login-container {
+            width: 100%;
+            max-width: 442px;
+        }
+
+        .login-card {
+            background: #ffffff;
+            padding: 42px 36px 36px;
+            border: 1px solid #e1e8f3;
+            border-radius: 18px;
+            box-shadow: 0 12px 35px rgba(31, 45, 70, 0.06);
+        }
+
+        .login-heading {
+            text-align: center;
+            margin-bottom: 32px;
+        }
+
+        .login-logo {
+            width: 42px;
+            height: 42px;
+            object-fit: contain;
+            margin-bottom: 8px;
+        }
+
+        .login-heading h2 {
+            font-size: 18px;
+            margin-bottom: 12px;
+        }
+
+        .login-heading h1 {
+            font-size: 24px;
+            letter-spacing: -0.7px;
+            margin-bottom: 8px;
+        }
+
+        .login-heading p {
+            font-size: 14px;
+            color: #64748b;
+            line-height: 1.5;
+        }
+
+        .form-group {
+            margin-bottom: 18px;
+        }
+
+        .label-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 8px;
+        }
+
+        label {
+            font-size: 12px;
+            font-weight: bold;
+            color: #34435d;
+            text-transform: uppercase;
+        }
+
+        .forgot-link {
+            font-size: 12px;
+            color: #5145ff;
+            text-decoration: none;
+        }
+
+        input[type="text"],
+        input[type="password"] {
+            width: 100%;
+            height: 44px;
+            padding: 0 15px;
+            border: 1px solid #dce5f1;
+            border-radius: 12px;
+            font-size: 14px;
+            outline: none;
+            color: #192238;
+            background: #ffffff;
+            box-shadow: 0 2px 3px rgba(31, 45, 70, 0.03);
+        }
+
+        input::placeholder {
+            color: #94a8c5;
+        }
+
+        input:focus {
+            border-color: #7167ff;
+            box-shadow: 0 0 0 3px rgba(81, 69, 255, 0.1);
+        }
+
+        .remember {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin: 4px 0 24px;
+            font-size: 12px;
+            color: #40516d;
+        }
+
+        .remember input {
+            width: 16px;
+            height: 16px;
+            accent-color: #5145ff;
+        }
+
+        .remember label {
+            text-transform: none;
+            font-size: 12px;
+            font-weight: normal;
+        }
+
+        .login-button,
+        .google-button {
+            width: 100%;
+            min-height: 42px;
+            border-radius: 12px;
+            font-size: 14px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .login-button {
+            border: none;
+            background: #1e293b;
+            color: #ffffff;
+            box-shadow: 0 3px 5px rgba(15, 23, 42, 0.15);
+        }
+
+        .login-button:hover {
+            background: #334155;
+        }
+
+        .divider {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin: 26px 0 24px;
+            color: #8da0bd;
+            font-size: 12px;
+            white-space: nowrap;
+        }
+
+        .divider::before,
+        .divider::after {
+            content: "";
+            height: 1px;
+            background: #e6edf5;
+            flex: 1;
+        }
+
+        .google-button {
+            border: 1px solid #dce5f1;
+            background: #ffffff;
+            color: #34435d;
+            font-weight: normal;
+        }
+
+        .google-button:hover {
+            background: #f8faff;
+        }
+
+        .google-icon {
+            color: #4285f4;
+            font-weight: bold;
+            font-size: 17px;
+            margin-right: 8px;
+        }
+
+        .register-text {
+            border-top: 1px solid #edf1f7;
+            padding-top: 22px;
+            margin-top: 24px;
+            text-align: center;
+            color: #64748b;
+            font-size: 12px;
+        }
+
+        .register-text a {
+            color: #192238;
+            font-weight: bold;
+            text-decoration: underline;
+        }
+
+        .security-note {
+            text-align: center;
+            margin-top: 16px;
+            color: #91a3bf;
+            font-size: 12px;
+        }
+
+        .security-icon {
+            color: #00b884;
+            margin-right: 6px;
+        }
+
+        footer {
+            text-align: center;
+            padding: 16px;
+            color: #91a3bf;
+            font-size: 12px;
+        }
+
+        @media (max-width: 480px) {
+            header {
+                padding: 18px 5%;
+            }
+
+            .brand {
+                font-size: 18px;
+                gap: 6px;
+            }
+
+            .brand img {
+                width: 34px;
+                height: 34px;
+            }
+
+            .header-link {
+                font-size: 12px;
+            }
+
+            .header-link a {
+                margin-left: 4px;
+            }
+
+            main {
+                padding: 20px 14px;
+            }
+
+            .login-card {
+                padding: 32px 22px;
+            }
+
+            .login-heading h1 {
+                font-size: 21px;
+            }
+        }
+    </style>
 </head>
+
 <body>
 
-  <header>
-    <a href="./index.html">
-      <img src="./assets/image/logo-taskmate.svg" alt="Logo TaskMate">
-    </a>
-  </header>
+    <header>
+        <a href="./index.html" class="brand">
+            <img src="./assets/image/logo-taskmate.svg"
+                 alt="Logo TaskMate">
+            <span>TaskMate</span>
+        </a>
 
-  <main>
-    <section>
-      <h1>Selamat Datang Kembali</h1>
-      <p>Masuk ke akun Anda untuk melanjutkan manajemen tugas.</p>
+        <div class="header-link">
+            Belum memiliki akun?
+            <a href="./register.html">Daftar Sekarang</a>
+        </div>
+    </header>
 
-      <form action="./dashboard.html" method="post">
-        <p>
-          <label for="login-email">Email atau Username:</label><br>
-          <input type="text" id="login-email" name="username_email" placeholder="Masukkan email atau username" required>
-        </p>
+    <main>
+        <div class="login-container">
+            <section class="login-card">
 
-        <p>
-          <label for="login-password">Password:</label><br>
-          <input type="password" id="login-password" name="password" placeholder="Masukkan kata sandi" required>
-        </p>
+                <div class="login-heading">
+                    <img src="./assets/image/logo-taskmate.svg"
+                         alt="Logo TaskMate"
+                         class="login-logo">
 
-        <p>
-          <button type="submit">Login</button>
-        </p>
-      </form>
+                    <h2>TaskMate</h2>
+                    <h1>Selamat Datang Kembali</h1>
+                    <p>Masuk ke akun Anda untuk melanjutkan</p>
+                </div>
 
-      <p>Belum punya akun? <a href="./register.html">Daftar di sini</a></p>
-    </section>
-  </main>
+                <form action="./dashboard.html" method="get">
 
-  <footer>
-    <p>&copy; 2026 TaskMate. All rights reserved.</p>
-  </footer>
+                    <div class="form-group">
+                        <div class="label-row">
+                            <label for="login-email">
+                                Email atau Username
+                            </label>
+                        </div>
+
+                        <input
+                            type="text"
+                            id="login-email"
+                            name="username_email"
+                            placeholder="nama@email.com atau username"
+                            autocomplete="username"
+                            required
+                        >
+                    </div>
+
+                    <div class="form-group">
+                        <div class="label-row">
+                            <label for="login-password">
+                                Kata Sandi
+                            </label>
+
+                            <a href="#" class="forgot-link">
+                                Lupa kata sandi?
+                            </a>
+                        </div>
+
+                        <input
+                            type="password"
+                            id="login-password"
+                            name="password"
+                            placeholder="Masukkan kata sandi"
+                            autocomplete="current-password"
+                            required
+                        >
+                    </div>
+
+                    <div class="remember">
+                        <input
+                            type="checkbox"
+                            id="remember-me"
+                            name="remember"
+                        >
+                        <label for="remember-me">
+                            Ingat saya di perangkat ini
+                        </label>
+                    </div>
+
+                    <button type="submit" class="login-button">
+                        Login
+                    </button>
+
+                </form>
+
+                <div class="divider">
+                    ATAU MASUK DENGAN
+                </div>
+
+                <button
+                    type="button"
+                    class="google-button"
+                    onclick="alert('Fitur login Google belum diaktifkan.')"
+                >
+                    <span class="google-icon">G</span>
+                    Masuk dengan Google
+                </button>
+
+                <div class="register-text">
+                    Belum punya akun?
+                    <a href="./register.html">Daftar</a>
+                </div>
+
+            </section>
+
+            <p class="security-note">
+                <span class="security-icon">♢</span>
+                Enkripsi aman 256-bit standar industri
+            </p>
+        </div>
+    </main>
+
+    <footer>
+        &copy; 2026 TaskMate. All rights reserved.
+    </footer>
 
 </body>
 </html>
+```
